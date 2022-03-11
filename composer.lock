@@ -1,0 +1,96 @@
+{
+    "_readme": [
+        "This file locks the dependencies of your project to a known state",
+        "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
+        "This file is @generated automatically"
+    ],
+    "content-hash": "d8c02b34604b82a9cfd6d574487e2338",
+    "packages": [
+        {
+            "name": "izisaurio/inn-validator",
+            "version": "1.0.0",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/izisaurio/inn-validator.git",
+                "reference": "499211c6f95f915a935ce86761ad4c3505d2bae5"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/izisaurio/inn-validator/zipball/499211c6f95f915a935ce86761ad4c3505d2bae5",
+                "reference": "499211c6f95f915a935ce86761ad4c3505d2bae5",
+                "shasum": ""
+            },
+            "require": {
+                "izisaurio/json-to-array": "^1.0"
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "Inn\\Validator\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "izisaurio",
+                    "email": "izi.isaac@gmail.com"
+                }
+            ],
+            "description": "A PHP simple object value validator",
+            "support": {
+                "issues": "https://github.com/izisaurio/inn-validator/issues",
+                "source": "https://github.com/izisaurio/inn-validator/tree/1.0.0"
+            },
+            "time": "2022-03-11T22:00:24+00:00"
+        },
+        {
+            "name": "izisaurio/json-to-array",
+            "version": "1.0.2",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/izisaurio/json-to-array.git",
+                "reference": "13d82f517c2680348be8ea18ee1130e89bcaa94d"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/izisaurio/json-to-array/zipball/13d82f517c2680348be8ea18ee1130e89bcaa94d",
+                "reference": "13d82f517c2680348be8ea18ee1130e89bcaa94d",
+                "shasum": ""
+            },
+            "type": "library",
+            "autoload": {
+                "psr-4": {
+                    "JsonToArray\\": "lib/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "izisaurio",
+                    "email": "izi.isaac@gmail.com"
+                }
+            ],
+            "description": "Json file to PHP array",
+            "support": {
+                "issues": "https://github.com/izisaurio/json-to-array/issues",
+                "source": "https://github.com/izisaurio/json-to-array/tree/1.0.2"
+            },
+            "time": "2022-02-27T01:16:16+00:00"
+        }
+    ],
+    "packages-dev": [],
+    "aliases": [],
+    "minimum-stability": "stable",
+    "stability-flags": [],
+    "prefer-stable": false,
+    "prefer-lowest": false,
+    "platform": [],
+    "platform-dev": [],
+    "plugin-api-version": "2.0.0"
+}

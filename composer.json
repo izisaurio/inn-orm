@@ -1,0 +1,25 @@
+{
+    "name": "izisaurio/inn-orm",
+    "description": "A simple PHP Orm",
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "izisaurio",
+            "email": "izi.isaac@gmail.com"
+        }
+    ],
+    "require": {
+        "izisaurio/inn-validator": "^1.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Inn\\": "lib/"
+        }
+    },
+	"autoload-dev": {
+		"psr-4": {
+			"mappers\\": "test/mappers/"
+		}
+	}
+}
