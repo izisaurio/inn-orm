@@ -4,23 +4,23 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "d8c02b34604b82a9cfd6d574487e2338",
+    "content-hash": "ca829f49098b12c86f3e601329401f20",
     "packages": [
         {
             "name": "izisaurio/inn-validator",
-            "version": "1.0.0",
+            "version": "1.0.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/izisaurio/inn-validator.git",
-                "reference": "499211c6f95f915a935ce86761ad4c3505d2bae5"
+                "reference": "a44becc50636998ce241f5df995cade60ad0755a"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/izisaurio/inn-validator/zipball/499211c6f95f915a935ce86761ad4c3505d2bae5",
-                "reference": "499211c6f95f915a935ce86761ad4c3505d2bae5",
+                "url": "https://api.github.com/repos/izisaurio/inn-validator/zipball/a44becc50636998ce241f5df995cade60ad0755a",
+                "reference": "a44becc50636998ce241f5df995cade60ad0755a",
                 "shasum": ""
             },
-            "require": {
+            "require-dev": {
                 "izisaurio/json-to-array": "^1.0"
             },
             "type": "library",
@@ -42,10 +42,12 @@
             "description": "A PHP simple object value validator",
             "support": {
                 "issues": "https://github.com/izisaurio/inn-validator/issues",
-                "source": "https://github.com/izisaurio/inn-validator/tree/1.0.0"
+                "source": "https://github.com/izisaurio/inn-validator/tree/1.0.1"
             },
-            "time": "2022-03-11T22:00:24+00:00"
-        },
+            "time": "2022-03-18T23:30:15+00:00"
+        }
+    ],
+    "packages-dev": [
         {
             "name": "izisaurio/json-to-array",
             "version": "1.0.2",
@@ -84,7 +86,6 @@
             "time": "2022-02-27T01:16:16+00:00"
         }
     ],
-    "packages-dev": [],
     "aliases": [],
     "minimum-stability": "stable",
     "stability-flags": [],

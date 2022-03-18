@@ -32,6 +32,7 @@ class users extends DBMapper
 	];
 }
 
+$json = new Json('assets/errors.json');
 $mysql = new Mysql('localhost', 'tests', 'root', '');
 $db = new Database($mysql);
 $user = (new users($db))->getModel();
@@ -40,7 +41,7 @@ $user->name = 'tester';
 $user->email = 'fake@email.com';
 $user
 	->setDefaults()
-	->validate(null, 'assets/errors.json')
+	->validate(null, $json->data)
 	->save()
 	->setInsertId();
 

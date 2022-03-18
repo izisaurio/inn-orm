@@ -49,11 +49,11 @@ class DBModel extends Model
 	 *
 	 * @access	public
 	 * @param	array			$rules		Model rules
-	 * @param	string			$messages	Error messages file path
+	 * @param	array			$messages	Error messages array
 	 * @throws	OrmException
 	 * @return	Model
 	 */
-	public function validate(array $rules = null, $messages = null)
+	public function validate(array $rules = null, array $messages = null)
 	{
 		if (!isset($rules)) {
 			$rules = $this->_mapper->properties;

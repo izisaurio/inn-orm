@@ -28,11 +28,11 @@ class Model
 	 *
 	 * @access	public
 	 * @param	array			$rules		Model rules
-	 * @param	string			$messages	Error messages file path
+	 * @param	array			$messages	Error messages array
 	 * @throws	OrmException
 	 * @return	Model
 	 */
-	public function validate(array $rules, $messages = null)
+	public function validate(array $rules, array $messages = null)
 	{
 		$dataObject = new DataObject($this->toArray(), $rules, $messages);
 		if (!$dataObject->validate()) {
