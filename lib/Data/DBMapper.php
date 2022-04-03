@@ -3,6 +3,8 @@
 namespace Inn\Data;
 
 use \ReflectionClass,
+	Inn\Exceptions\ForeignDataNotFoundException,
+	Inn\Exceptions\PropertyNotFoundException,
 	Inn\Sql\Sentence,
 	Inn\Sql\ForeignColumns,
 	Inn\Database\Database,

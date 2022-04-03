@@ -2,7 +2,7 @@
 
 namespace Inn\Data;
 
-use Inn\Exceptions\DatabaseStatementException;
+use Inn\Exceptions\DatabaseStatementException, Inn\Exceptions\OrmException;
 
 /**
  * Database model, represents a row in a table

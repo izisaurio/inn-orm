@@ -2,7 +2,7 @@
 
 namespace Inn\Database;
 
-use Inn\Exceptions\DatabseInstanceNotFoundException;
+use Inn\Exceptions\DatabaseInstanceNotFoundException;
 
 /**
  * Quotes a value with the provided Database instance
@@ -41,7 +41,7 @@ class Quote
 	public function __construct($value)
 	{
 		if (!isset(self::$database)) {
-			throw new DatabseInstanceNotFoundException();
+			throw new DatabaseInstanceNotFoundException();
 		}
 		$this->value = is_array($value)
 			? \array_map([self::$database->connection, 'quote'], $value)

@@ -10,7 +10,7 @@ use \Exception;
  * @author	izisaurio
  * @version	1
  */
-class DatabaseInstanceNotFound extends Exception
+class DatabaseInstanceNotFoundException extends Exception
 {
 	/**
 	 * Constructor
