@@ -199,7 +199,7 @@ class Sentence
 			$operator = '=';
 		}
 		if (\is_string($to)) {
-			$to = "'{$to}'";
+			$to = new Quote($to);
 		}
 		return $this->rawWhere("{$compare} {$operator} {$to}", $type);
 	}
@@ -515,6 +515,9 @@ class Sentence
 	 */
 	public function on($joinColumn, $operator, $tableColumn, $type = 'AND')
 	{
+		if (\is_string($tableColumn) && \strpos($tableColumn, '.') === false) {
+			$tableColumn = new Quote($tableColumn);
+		}
 		$this->on[] = empty($this->on)
 			? "{joinColumn} {$operator} {$tableColumn}"
 			: "{$type} {joinColumn} {$operator} {$tableColumn}";
@@ -610,6 +613,9 @@ class Sentence
 		if (!isset($to)) {
 			$to = $operator;
 			$operator = '=';
+		}
+		if (\is_string($to)) {
+			$to = new Quote($to);
 		}
 		return $this->rawHaving("{$compare} {$operator} {$to}");
 	}
