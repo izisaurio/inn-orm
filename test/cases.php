@@ -42,9 +42,8 @@ $select = $mapper
 		'id',
 		new Cases(
 			'users.name',
-			'label',
 			[
-				'izisaurio' => 'main',
+				'izisaurios' => 'main',
 				'editted' => 'secondary',
 			],
 			'other'
@@ -56,5 +55,5 @@ $select = $mapper
 	->all();
 
 foreach ($select as $user) {
-	var_dump($user->id, $user->label);
+	var_dump($user->id, $user->users_name);
 }

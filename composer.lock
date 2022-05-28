@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "izisaurio/inn-validator",
-            "version": "1.0.1",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/izisaurio/inn-validator.git",
-                "reference": "a44becc50636998ce241f5df995cade60ad0755a"
+                "reference": "1cfb204caae84fce86c8617434cd9fc401bf1770"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/izisaurio/inn-validator/zipball/a44becc50636998ce241f5df995cade60ad0755a",
-                "reference": "a44becc50636998ce241f5df995cade60ad0755a",
+                "url": "https://api.github.com/repos/izisaurio/inn-validator/zipball/1cfb204caae84fce86c8617434cd9fc401bf1770",
+                "reference": "1cfb204caae84fce86c8617434cd9fc401bf1770",
                 "shasum": ""
             },
             "require-dev": {
@@ -42,9 +42,9 @@
             "description": "A PHP simple object value validator",
             "support": {
                 "issues": "https://github.com/izisaurio/inn-validator/issues",
-                "source": "https://github.com/izisaurio/inn-validator/tree/1.0.1"
+                "source": "https://github.com/izisaurio/inn-validator/tree/1.0.3"
             },
-            "time": "2022-03-18T23:30:15+00:00"
+            "time": "2022-04-03T19:32:12+00:00"
         }
     ],
     "packages-dev": [
@@ -93,5 +93,5 @@
     "prefer-lowest": false,
     "platform": [],
     "platform-dev": [],
-    "plugin-api-version": "2.0.0"
+    "plugin-api-version": "2.3.0"
 }

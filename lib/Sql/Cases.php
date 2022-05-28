@@ -49,16 +49,16 @@ class Cases
 	 *
 	 * @access	public
 	 * @param	string	$column		Select column to be compared
-	 * @param	string	$as			Select alias
 	 * @param	array	$cases		Keys are cases, values are selected text
+	 * @param	string	$as			Select alias
 	 * @param	string	$else		Else de los cases
 	 */
-	public function __construct($column, $as, array $cases, $else = null)
+	public function __construct($column, array $cases, $else = null, $as = null)
 	{
 		$this->column = $column;
-		$this->as = $as;
 		$this->cases = $cases;
 		$this->else = $else;
+		$this->as = isset($as) ? $as : \str_replace('.', '_', $column);
 	}
 
 	/**

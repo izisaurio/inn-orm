@@ -7,8 +7,10 @@ use \ReflectionClass,
 	Inn\Exceptions\PropertyNotFoundException,
 	Inn\Sql\Sentence,
 	Inn\Sql\ForeignColumns,
+	Inn\Sql\Cases,
 	Inn\Database\Database,
-	Inn\Database\StatementParams;
+	Inn\Database\StatementParams,
+	Inn\Database\Quote;
 
 /**
  * Database Table mapper class
@@ -70,6 +72,15 @@ class DBMapper extends Sentence
 		$columns = [];
 		foreach ($select as $key => $column) {
 			if (\is_string($key)) {
+				if ($key === '@') {
+					$columns[] = new Quote($column);
+					continue;
+				}
+				if ($key[0] === ':') {
+					$name = \ltrim($key, ':');
+					$columns[] = new Cases($name, $column);
+					continue;
+				}
 				if (!isset($this->properties[$key]['union'])) {
 					throw new ForeignDataNotFoundException($this->table, $key);
 				}
