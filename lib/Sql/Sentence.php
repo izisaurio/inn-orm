@@ -112,7 +112,8 @@ class Sentence
 		foreach ($select as $column) {
 			if (\is_string($column)) {
 				$this->select[] =
-					\strpos($column, '.') === false && \strpos($column, '(')
+					\strpos($column, '.') === false &&
+					\strpos($column, '(') === false
 						? "{$this->table}.{$column}"
 						: $column;
 				continue;
