@@ -199,9 +199,6 @@ class Sentence
 			$to = $operator;
 			$operator = '=';
 		}
-		if (\is_string($to)) {
-			$to = new Quote($to);
-		}
 		return $this->rawWhere("{$compare} {$operator} {$to}", $type);
 	}
 
@@ -614,9 +611,6 @@ class Sentence
 		if (!isset($to)) {
 			$to = $operator;
 			$operator = '=';
-		}
-		if (\is_string($to)) {
-			$to = new Quote($to);
 		}
 		return $this->rawHaving("{$compare} {$operator} {$to}");
 	}
