@@ -519,8 +519,8 @@ class Sentence
 			$tableColumn = new Quote($tableColumn);
 		}
 		$this->on[] = empty($this->on)
-			? "{joinColumn} {$operator} {$tableColumn}"
-			: "{$type} {joinColumn} {$operator} {$tableColumn}";
+			? "{$joinColumn} {$operator} {$tableColumn}"
+			: "{$type} {$joinColumn} {$operator} {$tableColumn}";
 		return $this;
 	}
 
