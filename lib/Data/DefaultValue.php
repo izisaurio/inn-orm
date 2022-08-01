@@ -27,7 +27,7 @@ class DefaultValue
 	{
 		if ($defaultValue === '!now') {
 			$this->value = (new DateTime())->format('Y-m-d H:i:s');
-		} elseif ($defaultValue == '!today') {
+		} elseif ($defaultValue === '!today') {
 			$this->value = (new DateTime())->format('Y-m-d');
 		} elseif (\is_string($defaultValue) && $defaultValue[0] === '@') {
 			$key = \ltrim($defaultValue, '@');
