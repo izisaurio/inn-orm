@@ -2,7 +2,7 @@
 
 namespace Inn\Database;
 
-use \PDO;
+use \PDO, Inn\Exceptions\PluginDataTypeNotFoundException;
 
 /**
  * PDO connection plugin for mysql connections
@@ -61,9 +61,13 @@ class Mysql extends Plugin
 	 * @access	public
 	 * @param	string		$type	Innsert\orm type
 	 * @return	int
+	 * @throws	Exceptions\PluginDataTypeNotFoundException
 	 */
 	public function translate($type)
 	{
+		if (!\array_key_exists($type, $this->dictionary)) {
+			throw new PluginDataTypeNotFoundException($type, 'MySql');
+		}
 		return $this->dictionary[$type];
 	}
 }

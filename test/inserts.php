@@ -25,6 +25,7 @@ class users extends DBMapper
 		],
 		'phone' => [
 			'type' => 'int',
+			//'type' => 'integer', //Uncomment to test PluginDataTypeNotFoundException
 			'isInt' => true,
 			'default' => 1234567890,
 			'label' => 'Phone number',
