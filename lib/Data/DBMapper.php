@@ -123,7 +123,7 @@ class DBMapper extends Sentence
 	 */
 	public function findId($id)
 	{
-		return $this->where($this->primary, $id)
+		return $this->where("{$this->table}.{$this->primary}", $id)
 			->limit(1)
 			->find()
 			->first();
