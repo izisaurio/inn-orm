@@ -151,12 +151,12 @@ class DBUnion extends Sentence
 		foreach ($this->properties as $key => $values) {
 			if ($key != $table) {
 				return (object) [
-					'this' => [
+					'this' => (object) [
 						'table' => $table,
-						'key' => $this->properties[$name]['key'],
-						'id' => $this->properties[$name]['id'],
+						'key' => $this->properties[$table]['key'],
+						'id' => $this->properties[$table]['id'],
 					],
-					'union' => [
+					'union' => (object) [
 						'table' => isset($values['table'])
 							? $values['table']
 							: $key,
