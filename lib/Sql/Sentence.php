@@ -337,7 +337,7 @@ class Sentence
 	 */
 	public function whereNotNull($compare, $type = 'AND')
 	{
-		return $this->rawWhere("{$compare} NOT NULL", $type);
+		return $this->rawWhere("{$compare} IS NOT NULL", $type);
 	}
 
 	/**
