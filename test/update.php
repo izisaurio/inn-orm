@@ -37,6 +37,6 @@ $db = new Database($mysql);
 $user = (new users($db))->select(['*'])->findId(new Quote(2));
 
 $user->name = 'SlayTheSpire';
-$user->validate(null, 'assets/errors.json')->save();
+$user->validate()->save()->setInsertId();
 
 var_dump($user);

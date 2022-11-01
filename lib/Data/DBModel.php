@@ -101,8 +101,10 @@ class DBModel extends Model
 	 */
 	public function setInsertId()
 	{
-		$this->{$this->_mapper
-			->primary} = $this->_mapper->database->connection->lastInsertId();
+		if (!isset($this->{$this->_mapper->primary})) {
+			$this->{$this->_mapper
+				->primary} = $this->_mapper->database->connection->lastInsertId();
+		}
 		return $this;
 	}
 
