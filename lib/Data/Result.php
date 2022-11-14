@@ -102,6 +102,21 @@ class Result
 	}
 
 	/**
+	 * Returns using a field as a key
+	 * 
+	 * @access	public
+	 * @param	string	$key	Field name to use as key
+	 * @return	array
+	 */
+	public function indexed($key) {
+		if (empty($this->source)) {
+			return [];
+		}
+		$keys = \array_column($this->source, $key);
+		return \array_combine($keys, $this->all());
+	}
+
+	/**
 	 * Returns first result as model
 	 *
 	 * @access	public

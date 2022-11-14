@@ -189,6 +189,7 @@ class DBMapper extends Sentence
 			throw new PropertyNotFoundException($this->table, $this->primary);
 		}
 		$this->where = [];
+		$this->join = [];
 		$this->where($this->primary, '=', $data[$this->primary]);
 		$this->updateAll($model->toArray());
 	}
