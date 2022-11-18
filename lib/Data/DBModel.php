@@ -50,15 +50,16 @@ class DBModel extends Model
 	 * @access	public
 	 * @param	array			$rules		Model rules
 	 * @param	array			$messages	Error messages array
+	 * @param	string			$language	Optional label language
 	 * @throws	OrmException
 	 * @return	Model
 	 */
-	public function validate(array $rules = null, array $messages = null)
+	public function validate(array $rules = null, array $messages = null, $language = null)
 	{
 		if (!isset($rules)) {
 			$rules = $this->_mapper->properties;
 		}
-		return parent::validate($rules, $messages);
+		return parent::validate($rules, $messages, $language);
 	}
 
 	/**

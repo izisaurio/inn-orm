@@ -29,12 +29,21 @@ class Model
 	 * @access	public
 	 * @param	array			$rules		Model rules
 	 * @param	array			$messages	Error messages array
+	 * @param	string			$language	Optional label language
 	 * @throws	OrmException
 	 * @return	Model
 	 */
-	public function validate(array $rules, array $messages = null)
-	{
-		$dataObject = new DataObject($this->toArray(), $rules, $messages);
+	public function validate(
+		array $rules,
+		array $messages = null,
+		$language = null
+	) {
+		$dataObject = new DataObject(
+			$this->toArray(),
+			$rules,
+			$messages,
+			$language
+		);
 		if (!$dataObject->validate()) {
 			throw new OrmException(join("\n", $dataObject->getErrors()));
 		}

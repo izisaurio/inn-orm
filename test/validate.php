@@ -16,19 +16,19 @@ class users extends DBMapper
 			'isSafeText' => 'true',
 			'maxLength' => 155,
 			'minLength' => 5,
-			'label' => 'User name',
+			'label' => ['en' => 'User name', 'es' => 'Nombre de usuario'],
 		],
 		'email' => [
 			'type' => 'text',
 			'isEmail' => true,
 			'maxLength' => 155,
-			'label' => 'User email',
+			'label' => ['en' => 'User email', 'es' => 'Correo de usuario'],
 		],
 		'phone' => [
 			'type' => 'int',
 			'isInt' => true,
 			'default' => 1234567890,
-			'label' => 'Phone number',
+			'label' => ['en' => 'Phone number', 'es' => 'Número de teléfono'],
 		],
 	];
 }
@@ -45,9 +45,8 @@ var_dump($user->phone);
 $user->name = 'Izisaurio';
 $user->email = 'myemail';
 try {
-	$user->validate(null, $json->data);
-}
-catch (OrmException $ex) {
+	$user->validate(null, $json->data, 'en');
+} catch (OrmException $ex) {
 	var_dump($ex->getMessage());
 }
 
