@@ -101,6 +101,14 @@ class Sentence
 	public $alias;
 
 	/**
+	 * Joined table name for sentences in join closures
+	 *
+	 * @access	public
+	 * @var		string
+	 */
+	public $joinedTable;
+
+	/**
 	 * Select table columns
 	 *
 	 * @access	public
@@ -407,6 +415,8 @@ class Sentence
 	) {
 		if ($joinColumn instanceof Closure) {
 			$sentence = $this->newSelf();
+			$sentence->joinedTable = $this->table;
+			$sentence->table = $join;
 			$joinColumn($sentence);
 			$on = \join(' ', $sentence->on);
 			$this->join[] = "{$type} JOIN {$join} ON {$on}";
@@ -522,15 +532,12 @@ class Sentence
 	 */
 	public function on($joinColumn, $operator, $tableColumn, $type = 'AND')
 	{
-		if (\is_string($tableColumn) && \strpos($tableColumn, '.') === false) {
-			$tableColumn = new Quote($tableColumn);
-		}
 		$joinColumn = is_array($joinColumn)
 			? $joinColumn[0]
-			: $this->prepareColumn($joinColumn);
+			: $this->prepareColumn($joinColumn, $this->table);
 		$tableColumn = is_array($tableColumn)
 			? $tableColumn[0]
-			: $this->prepareColumn($tableColumn);
+			: $this->prepareColumn($tableColumn, $this->joinedTable);
 		$this->on[] = empty($this->on)
 			? "{$joinColumn} {$operator} {$tableColumn}"
 			: "{$type} {$joinColumn} {$operator} {$tableColumn}";
