@@ -11,12 +11,13 @@ $mapper = new users($db);
 $select = $mapper
 	->select([
 		'id',
-		'@' => 3,
-		':users.name' => ['izisaurio' => 'main', 'editted' => 'secondary'],
+		'@number' => 3,
+		':users.name' => ['izisaurio' => 'main', 'tester' => 'secondary'],
 	])
-	->limit('5')
-	->orderBy(['users.id desc'])
+	->limit('10')
+	->orderBy(['id desc'])
 	->find()
 	->all();
 
 var_dump($select);
+var_dump($db->queriesLog);

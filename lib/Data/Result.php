@@ -102,18 +102,33 @@ class Result
 	}
 
 	/**
-	 * Returns using a field as a key
-	 * 
+	 * Returns model collection or source using a field as a key
+	 *
 	 * @access	public
 	 * @param	string	$key	Field name to use as key
+	 * @param	bool	$source	Flag to return source instead of models
 	 * @return	array
 	 */
-	public function indexed($key) {
+	public function indexed($key, $source = false)
+	{
 		if (empty($this->source)) {
 			return [];
 		}
 		$keys = \array_column($this->source, $key);
-		return \array_combine($keys, $this->all());
+		$collection = $source ? $this->source : $this->all();
+		return \array_combine($keys, $collection);
+	}
+
+	/**
+	 * Returns source using a field as a key
+	 *
+	 * @access	public
+	 * @param	string	$key	Field name to use as key
+	 * @return	array
+	 */
+	public function indexedSource($key)
+	{
+		return $this->indexed($key, true);
 	}
 
 	/**

@@ -72,8 +72,10 @@ class DBMapper extends Sentence
 		$columns = [];
 		foreach ($select as $key => $column) {
 			if (\is_string($key)) {
-				if ($key === '@') {
-					$columns[] = new Quote($column);
+				if ($key[0] === '@') {
+					$name = \ltrim($key, '@');
+					$value = new Quote($column);
+					$columns[] = "{$value} as {$name}";
 					continue;
 				}
 				if ($key[0] === ':') {

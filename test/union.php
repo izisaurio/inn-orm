@@ -22,3 +22,4 @@ $subjects = (new subjects($db))
 	->all();
 
 var_dump($subjects);
+var_dump($db->queriesLog);

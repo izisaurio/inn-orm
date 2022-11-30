@@ -111,11 +111,7 @@ class Sentence
 	{
 		foreach ($select as $column) {
 			if (\is_string($column)) {
-				$this->select[] =
-					\strpos($column, '.') === false &&
-					\strpos($column, '(') === false
-						? "{$this->table}.{$column}"
-						: $column;
+				$this->select[] = $this->prepareColumn($column);
 				continue;
 			}
 			if ($column instanceof ForeignColumns) {
@@ -199,6 +195,10 @@ class Sentence
 			$to = $operator;
 			$operator = '=';
 		}
+		$compare = is_array($compare)
+			? $compare[0]
+			: $this->prepareColumn($compare);
+		$to = is_array($to) ? $to[0] : $this->quote($to);
 		return $this->rawWhere("{$compare} {$operator} {$to}", $type);
 	}
 
@@ -252,6 +252,7 @@ class Sentence
 			$values instanceof Quote
 				? \join(',', $values->value)
 				: \join(',', $values);
+		$compare = $this->prepareColumn($compare);
 		return $this->rawWhere("{$compare} IN ({$data})", $type);
 	}
 
@@ -286,6 +287,7 @@ class Sentence
 			$values instanceof Quote
 				? \join(',', $values->value)
 				: \join(',', $values);
+		$compare = $this->prepareColumn($compare);
 		return $this->rawWhere("{$compare} NOT IN ({$data})", $type);
 	}
 
@@ -364,6 +366,7 @@ class Sentence
 	 */
 	public function whereBetween($compare, $first, $second, $type = 'AND')
 	{
+		$compare = $this->prepareColumn($compare);
 		return $this->rawWhere(
 			"{$compare} BETWEEN {$first} AND {$second}",
 			$type
@@ -388,8 +391,8 @@ class Sentence
 	 * Adds a join between tables
 	 *
 	 * @access	public
-	 * @param	string				$join			Foreign table
-	 * @param	string|Clousure		$joinColumn		Foreign table key|Closure for nested joins
+	 * @param	mixed				$join			Foreign table
+	 * @param	mixed|Clousure		$joinColumn		Foreign table key|Closure for nested joins
 	 * @param	string				$operator		Operator
 	 * @param	string				$tableColumn	This table key
 	 * @param	string				$type			Type of join
@@ -409,6 +412,12 @@ class Sentence
 			$this->join[] = "{$type} JOIN {$join} ON {$on}";
 			return $this;
 		}
+		$joinColumn = is_array($joinColumn)
+			? $joinColumn[0]
+			: $this->prepareColumn($joinColumn, $join);
+		$tableColumn = is_array($tableColumn)
+			? $tableColumn[0]
+			: $this->prepareColumn($tableColumn);
 		$this->join[] = "{$type} JOIN {$join} ON {$joinColumn} {$operator} {$tableColumn}";
 		return $this;
 	}
@@ -417,8 +426,8 @@ class Sentence
 	 * Adds a join between tables of type "Inner"
 	 *
 	 * @access	public
-	 * @param	string				$join			Foreign table
-	 * @param	string|Clousure		$joinColumn		Foreign table key|Closure for nested joins
+	 * @param	mixed				$join			Foreign table
+	 * @param	mixed|Clousure		$joinColumn		Foreign table key|Closure for nested joins
 	 * @param	string				$operator		Operator
 	 * @param	string				$tableColumn	This table key
 	 * @return	mixed
@@ -436,8 +445,8 @@ class Sentence
 	 * Adds a join between tables of type "Left"
 	 *
 	 * @access	public
-	 * @param	string				$join			Foreign table
-	 * @param	string|Clousure		$joinColumn		Foreign table key|Closure for nested joins
+	 * @param	mixed				$join			Foreign table
+	 * @param	mixed|Clousure		$joinColumn		Foreign table key|Closure for nested joins
 	 * @param	string				$operator		Operator
 	 * @param	string				$tableColumn	This table key
 	 * @return	mixed
@@ -455,8 +464,8 @@ class Sentence
 	 * Adds a join between tables of type "Right"
 	 *
 	 * @access	public
-	 * @param	string				$join			Foreign table
-	 * @param	string|Clousure		$joinColumn		Foreign table key|Closure for nested joins
+	 * @param	mixed				$join			Foreign table
+	 * @param	mixed|Clousure		$joinColumn		Foreign table key|Closure for nested joins
 	 * @param	string				$operator		Operator
 	 * @param	string				$tableColumn	This table key
 	 * @return	mixed
@@ -480,8 +489,8 @@ class Sentence
 	 * Adds a join between tables of type "Full Outer"
 	 *
 	 * @access	public
-	 * @param	string				$join			Foreign table
-	 * @param	string|Clousure		$joinColumn		Foreign table key|Closure for nested joins
+	 * @param	mixed				$join			Foreign table
+	 * @param	mixed|Clousure		$joinColumn		Foreign table key|Closure for nested joins
 	 * @param	string				$operator		Operator
 	 * @param	string				$tableColumn	This table key
 	 * @return	mixed
@@ -505,9 +514,9 @@ class Sentence
 	 * Adds a join condition
 	 *
 	 * @access	public
-	 * @param	string		$joinColumn		Foreign table key
+	 * @param	mixed		$joinColumn		Foreign table key
 	 * @param	string		$operator		Operator
-	 * @param	string		$tableColumn	This table key
+	 * @param	mixed		$tableColumn	This table key
 	 * @param	string		$type			On union type (and, or)
 	 * @return	mixed
 	 */
@@ -516,6 +525,12 @@ class Sentence
 		if (\is_string($tableColumn) && \strpos($tableColumn, '.') === false) {
 			$tableColumn = new Quote($tableColumn);
 		}
+		$joinColumn = is_array($joinColumn)
+			? $joinColumn[0]
+			: $this->prepareColumn($joinColumn);
+		$tableColumn = is_array($tableColumn)
+			? $tableColumn[0]
+			: $this->prepareColumn($tableColumn);
 		$this->on[] = empty($this->on)
 			? "{$joinColumn} {$operator} {$tableColumn}"
 			: "{$type} {$joinColumn} {$operator} {$tableColumn}";
@@ -526,9 +541,9 @@ class Sentence
 	 * Adds a join condition of type "Or"
 	 *
 	 * @access	public
-	 * @param	string		$joinColumn		Foreign table key
+	 * @param	mixed		$joinColumn		Foreign table key
 	 * @param	string		$operator		Operator
-	 * @param	string		$tableColumn	This table key
+	 * @param	mixed		$tableColumn	This table key
 	 * @return	mixed
 	 */
 	public function orOn($joinColumn, $operator, $tableColumn)
@@ -540,7 +555,7 @@ class Sentence
 	 * Adds a join "on in" condition
 	 *
 	 * @access	public
-	 * @param	string		$joinColumn		Foreign table key
+	 * @param	mixed		$joinColumn		Foreign table key
 	 * @param	array|Quote	$values			Values
 	 * @param	string		$type			On union type (and, or)
 	 * @param	string		$operator		Operator
@@ -559,7 +574,7 @@ class Sentence
 	 * Adds a join "on not in" condition
 	 *
 	 * @access	public
-	 * @param	string		$joinColumn		Foreign table key
+	 * @param	mixed		$joinColumn		Foreign table key
 	 * @param	array		$values			Values
 	 * @param	string		$type			On union type (and, or)
 	 * @return	mixed
@@ -590,7 +605,7 @@ class Sentence
 	 * Add a closure as first param for nested having
 	 *
 	 * @access	public
-	 * @param	string/Closure	$compare	Column of value to compare|Closure for nested having
+	 * @param	mixed/Closure	$compare	Column of value to compare|Closure for nested having
 	 * @param	mixed			$operator	Operator
 	 * @param	mixed			$to			Value of comparison
 	 * @param	string			$type		Having union type (And, Or)
@@ -612,6 +627,10 @@ class Sentence
 			$to = $operator;
 			$operator = '=';
 		}
+		$compare = is_array($compare)
+			? $compare[0]
+			: $this->prepareColumn($compare);
+		$to = is_array($to) ? $to[0] : $this->quote($to);
 		return $this->rawHaving("{$compare} {$operator} {$to}");
 	}
 
@@ -656,7 +675,7 @@ class Sentence
 	 */
 	public function groupBy(array $group)
 	{
-		$this->groupBy = $group;
+		$this->groupBy = \array_map([$this, 'prepareColumn'], $group);
 		return $this;
 	}
 
@@ -669,7 +688,7 @@ class Sentence
 	 */
 	public function orderBy(array $order)
 	{
-		$this->orderBy = $order;
+		$this->orderBy = \array_map([$this, 'prepareColumn'], $order);
 		return $this;
 	}
 
@@ -779,6 +798,42 @@ class Sentence
 		$joins = empty($this->join) ? '' : ' ' . \join(' ', $this->join);
 		$where = \join(' ', $this->where);
 		return "DELETE{$table}FROM {$this->table}{$joins} WHERE {$where}";
+	}
+
+	/**
+	 * Prepends a column with the table it belongs
+	 *
+	 * @access	protected
+	 * @param	string		$column		Column name
+	 * @param	string		$table		Optional table if null it uses this sentence table
+	 * @return	string
+	 */
+	protected function prepareColumn($column, $table = null)
+	{
+		if (!isset($table)) {
+			$table = $this->table;
+		}
+		return \strpos($column, '.') === false &&
+			\strpos($column, '(') === false &&
+			\strpos($column, '\'') === false
+			? "{$table}.{$column}"
+			: $column;
+	}
+
+	/**
+	 * Quotes a where or having value
+	 *
+	 * @access	protected
+	 * @param	mixed		$value	Value to quote
+	 * @return	string
+	 */
+	protected function quote($value)
+	{
+		return !is_numeric($value) &&
+			$value !== '?' &&
+			!($value instanceof Quote)
+			? new Quote($value)
+			: $value;
 	}
 
 	/**

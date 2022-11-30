@@ -57,3 +57,5 @@ $select = $mapper
 foreach ($select as $user) {
 	var_dump($user->id, $user->users_name);
 }
+
+var_dump($db->queriesLog);

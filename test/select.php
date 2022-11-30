@@ -9,10 +9,11 @@ $db = new Database($mysql);
 $mapper = new users($db);
 
 $select = $mapper
-	->select(['*'])
+	->select(['*', '@name' => 'izisaurio'])
 	->limit('5')
 	->orderBy(['users.id desc'])
 	->find()
 	->all();
 
 var_dump($select);
+var_dump($db->queriesLog);

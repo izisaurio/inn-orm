@@ -16,3 +16,12 @@ $indexed = $mapper
 	->indexed('id');
 
 var_dump($indexed);
+
+$indexed = $mapper
+	->select(['*'])
+	->limit('5')
+	->orderBy(['users.id desc'])
+	->find()
+	->indexedSource('id');
+
+var_dump($indexed);
