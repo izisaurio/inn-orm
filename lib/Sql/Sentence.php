@@ -203,10 +203,8 @@ class Sentence
 			$to = $operator;
 			$operator = '=';
 		}
-		$compare = is_array($compare)
-			? $compare[0]
-			: $this->prepareColumn($compare);
-		$to = is_array($to) ? $to[0] : $this->quote($to);
+		$compare = $this->prepareColumn($compare);
+		$to = $this->quote($to);
 		return $this->rawWhere("{$compare} {$operator} {$to}", $type);
 	}
 
@@ -422,12 +420,8 @@ class Sentence
 			$this->join[] = "{$type} JOIN {$join} ON {$on}";
 			return $this;
 		}
-		$joinColumn = is_array($joinColumn)
-			? $joinColumn[0]
-			: $this->prepareColumn($joinColumn, $join);
-		$tableColumn = is_array($tableColumn)
-			? $tableColumn[0]
-			: $this->prepareColumn($tableColumn);
+		$joinColumn = $this->prepareColumn($joinColumn, $join);
+		$tableColumn = $this->prepareColumn($tableColumn);
 		$this->join[] = "{$type} JOIN {$join} ON {$joinColumn} {$operator} {$tableColumn}";
 		return $this;
 	}
@@ -532,12 +526,8 @@ class Sentence
 	 */
 	public function on($joinColumn, $operator, $tableColumn, $type = 'AND')
 	{
-		$joinColumn = is_array($joinColumn)
-			? $joinColumn[0]
-			: $this->prepareColumn($joinColumn, $this->table);
-		$tableColumn = is_array($tableColumn)
-			? $tableColumn[0]
-			: $this->prepareColumn($tableColumn, $this->joinedTable);
+		$joinColumn = $this->prepareColumn($joinColumn);
+		$tableColumn = $this->prepareColumn($tableColumn, $this->joinedTable);
 		$this->on[] = empty($this->on)
 			? "{$joinColumn} {$operator} {$tableColumn}"
 			: "{$type} {$joinColumn} {$operator} {$tableColumn}";
@@ -634,10 +624,8 @@ class Sentence
 			$to = $operator;
 			$operator = '=';
 		}
-		$compare = is_array($compare)
-			? $compare[0]
-			: $this->prepareColumn($compare);
-		$to = is_array($to) ? $to[0] : $this->quote($to);
+		$compare = $this->prepareColumn($compare);
+		$to = $this->quote($to);
 		return $this->rawHaving("{$compare} {$operator} {$to}");
 	}
 
@@ -811,12 +799,15 @@ class Sentence
 	 * Prepends a column with the table it belongs
 	 *
 	 * @access	protected
-	 * @param	string		$column		Column name
+	 * @param	mixed		$column		Column name
 	 * @param	string		$table		Optional table if null it uses this sentence table
 	 * @return	string
 	 */
 	protected function prepareColumn($column, $table = null)
 	{
+		if (\is_array($column)) {
+			return $column[0];
+		}
 		if (!isset($table)) {
 			$table = $this->table;
 		}
@@ -836,7 +827,10 @@ class Sentence
 	 */
 	protected function quote($value)
 	{
-		return !is_numeric($value) &&
+		if (\is_array($value)) {
+			return $value[0];
+		}
+		return !\is_numeric($value) &&
 			$value !== '?' &&
 			!($value instanceof Quote)
 			? new Quote($value)
