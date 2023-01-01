@@ -72,15 +72,22 @@ class DBMapper extends Sentence
 		$columns = [];
 		foreach ($select as $key => $column) {
 			if (\is_string($key)) {
+				if ($key[0] === ':') {
+					$name = \ltrim($key, ':');
+					$columns[] = new Cases($name, $column);
+					continue;
+				}
+				if ($key[0] === '$') {
+					$name = \ltrim($key, '$');
+					$values = \is_array($column) ? $column : [$column];
+					foreach ($values as $value) {
+						$columns[] = "{$name} ->> '\$.{$value}' as {$name}_{$value}";
+					}
+				}
 				if ($key[0] === '@') {
 					$name = \ltrim($key, '@');
 					$value = new Quote($column);
 					$columns[] = "{$value} as {$name}";
-					continue;
-				}
-				if ($key[0] === ':') {
-					$name = \ltrim($key, ':');
-					$columns[] = new Cases($name, $column);
 					continue;
 				}
 				if (!isset($this->properties[$key]['union'])) {

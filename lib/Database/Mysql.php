@@ -28,6 +28,7 @@ class Mysql extends Plugin
 		'time' => PDO::PARAM_STR,
 		'timestamp' => PDO::PARAM_INT,
 		'bool' => PDO::PARAM_BOOL,
+		'json' => PDO::PARAM_STR,
 	];
 
 	/**

@@ -31,7 +31,7 @@ class StatementParams
 	{
 		$param = new StdClass();
 		$param->attr = $attr;
-		$param->value = $value;
+		$param->value = \is_array($value) ? \json_encode($value) : $value;
 		$this->items[] = $param;
 	}
 }
