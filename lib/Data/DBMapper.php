@@ -72,32 +72,46 @@ class DBMapper extends Sentence
 		$columns = [];
 		foreach ($select as $key => $column) {
 			if (\is_string($key)) {
-				if ($key[0] === ':') {
-					$name = \ltrim($key, ':');
-					$columns[] = new Cases($name, $column);
-					continue;
+				switch ($key[0]) {
+					case '$':
+						$name = \ltrim($key, '$');
+						$values = \is_array($column) ? $column : [$column];
+						foreach ($values as $value) {
+							if (\strpos($value, ' ') === false) {
+								$property = \str_replace('.', '_', $name);
+								$columns[] = "{$name} ->> '\$.{$value}' as {$property}_{$value}";
+							} else {
+								list($key, $as) = explode(' ', $value, 2);
+								$columns[] = "{$name} ->> '\$.{$key}' $as";
+							}
+						}
+						break;
+
+					case ':':
+						$name = \ltrim($key, ':');
+						$columns[] = new Cases($name, $column);
+						break;
+
+					case '@':
+						$name = \ltrim($key, '@');
+						$value = new Quote($column);
+						$columns[] = "{$value} as {$name}";
+						break;
+
+					default:
+						if (!isset($this->properties[$key]['union'])) {
+							throw new ForeignDataNotFoundException(
+								$this->table,
+								$key
+							);
+						}
+						$columns[] = new ForeignColumns(
+							$key,
+							$column,
+							$this->properties[$key]['union']
+						);
+						break;
 				}
-				if ($key[0] === '$') {
-					$name = \ltrim($key, '$');
-					$values = \is_array($column) ? $column : [$column];
-					foreach ($values as $value) {
-						$columns[] = "{$name} ->> '\$.{$value}' as {$name}_{$value}";
-					}
-				}
-				if ($key[0] === '@') {
-					$name = \ltrim($key, '@');
-					$value = new Quote($column);
-					$columns[] = "{$value} as {$name}";
-					continue;
-				}
-				if (!isset($this->properties[$key]['union'])) {
-					throw new ForeignDataNotFoundException($this->table, $key);
-				}
-				$columns[] = new ForeignColumns(
-					$key,
-					$column,
-					$this->properties[$key]['union']
-				);
 				continue;
 			}
 			$columns[] = $column;

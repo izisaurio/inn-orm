@@ -12,6 +12,7 @@ $select = $mapper
 	->select([
 		'id',
 		'@number' => 3,
+		'$attributes' => 'age',
 		':users.name' => ['izisaurio' => 'main', 'tester' => 'secondary'],
 	])
 	->limit('10')

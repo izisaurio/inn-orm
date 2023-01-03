@@ -30,6 +30,11 @@ class users extends DBMapper
 			'default' => 1234567890,
 			'label' => 'Phone number',
 		],
+		'attributes' => [
+			'type' => 'json',
+			'isArray' => true,
+			'label' => 'User attributes',
+		],
 	];
 }
 
@@ -40,6 +45,7 @@ $user = (new users($db))->getModel();
 
 $user->name = 'tester';
 $user->email = 'fake@email.com';
+$user->attributes = ['age' => 25, 'gender' => 'male'];
 $user
 	->setDefaults()
 	->validate(null, $json->data)

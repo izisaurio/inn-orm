@@ -27,6 +27,22 @@ class Result
 	protected $mapper;
 
 	/**
+	 * Json values to decode
+	 *
+	 * @access	protected
+	 * @var		array
+	 */
+	protected $decode = [];
+
+	/**
+	 * When json decoded set it as array
+	 *
+	 * @access	private
+	 * @var		bool
+	 */
+	private $decodeAsArray = true;
+
+	/**
 	 * Constructor
 	 *
 	 * Sets source and mapper
@@ -42,6 +58,19 @@ class Result
 	}
 
 	/**
+	 * Sets decode flag to true
+	 *
+	 * @access	public
+	 * @param	array	$columns	Columns to decode
+	 * @return	Data\Result
+	 */
+	public function decode(array $columns)
+	{
+		$this->decode = $columns;
+		return $this;
+	}
+
+	/**
 	 * Returns results source
 	 *
 	 * @access	public
@@ -49,6 +78,16 @@ class Result
 	 */
 	public function source()
 	{
+		if (!empty($this->decode)) {
+			foreach ($this->source as &$item) {
+				foreach ($this->decode as $column) {
+					$item[$column] = \json_decode(
+						$item[$column],
+						$this->decodeAsArray
+					);
+				}
+			}
+		}
 		return $this->source;
 	}
 
@@ -61,7 +100,9 @@ class Result
 	public function all()
 	{
 		$results = [];
-		foreach ($this->source as $row) {
+		$this->decodeAsArray = false;
+		$source = $this->source();
+		foreach ($source as $row) {
 			$model = $this->mapper->getModel();
 			foreach ($row as $property => $value) {
 				$model->$property = $value;

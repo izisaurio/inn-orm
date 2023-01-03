@@ -26,5 +26,10 @@ class users extends DBMapper
 			'default' => 1234567890,
 			'label' => 'Phone number',
 		],
+		'attributes' => [
+			'type' => 'json',
+			'isArray' => true,
+			'label' => 'User attributes'
+		]
 	];
 }

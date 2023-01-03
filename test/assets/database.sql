@@ -11,6 +11,7 @@ CREATE TABLE users(
 	name varchar(155) NOT NULL,
 	email varchar(155) NOT NULL,
 	phone bigint NOT NULL,
+	attributes json NOT NULL,
 	CONSTRAINT PRIMARY KEY (id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;
 
@@ -36,7 +37,7 @@ CREATE TABLE users_subjects(
 	FOREIGN KEY (idSubject) REFERENCES subjects (id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;
 
-INSERT INTO users VALUES (0, 'izisaurio', 'izi.isaac@gmail.com', 1234567890);
+INSERT INTO users VALUES (0, 'izisaurio', 'izi.isaac@gmail.com', '{"age": "36"}' 1234567890);
 INSERT INTO tasks VALUES (0, 'develop', 1);
 INSERT INTO subjects VALUES (0, 'first');
 INSERT INTO subjects VALUES (0, 'second');
