@@ -2,7 +2,7 @@
 
 namespace Inn\Database;
 
-use \StdClass;
+use \StdClass, Inn\Sql\JsonSet;
 
 /**
  * Statement param collection
@@ -31,7 +31,12 @@ class StatementParams
 	{
 		$param = new StdClass();
 		$param->attr = $attr;
-		$param->value = \is_array($value) ? \json_encode($value) : $value;
+		$param->value =
+			\is_array($value) || $value instanceof StdClass
+				? \json_encode($value)
+				: ($value instanceof JsonSet
+					? $value->build($attr)
+					: $value);
 		$this->items[] = $param;
 	}
 }

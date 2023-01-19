@@ -768,14 +768,19 @@ class Sentence
 	 *
 	 * @access	public
 	 * @param	array		$update		Table columns and values
+	 * @param	array		$raws		Fields to update raw
 	 * @return	string
 	 */
-	public function buildUpdate(array $update)
+	public function buildUpdate(array $update = [], array $raws = [])
 	{
-		foreach ($update as &$field) {
-			$field = "{$this->table}.{$field}=?";
+		$updates = \array_map(
+			fn($field) => "{$this->table}.{$field} = ?",
+			$update
+		);
+		foreach ($raws as $field => $value) {
+			$updates[] = "{$this->table}.{$field} = {$value}";
 		}
-		$fields = \join(',', $update);
+		$fields = \join(', ', $updates);
 		$joins = empty($this->join) ? '' : ' ' . \join(' ', $this->join);
 		$where = \join(' ', $this->where);
 		return "UPDATE {$this->table}{$joins} SET {$fields} WHERE {$where}";

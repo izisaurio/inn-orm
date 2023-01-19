@@ -18,10 +18,15 @@ $tasks = (new tasks($db))
 
 //var_dump($tasks);
 
+$withId = (new users($db))->select(['name', 'attributes'])->findId(1, ['attributes']);
+
+//var_dump($withId);
+
 $decoded = (new users($db))
 	->select(['name', 'attributes'])
 	->where('id', 1)
 	->find()
 	->decode(['attributes'])
 	->all();
+
 var_dump($decoded);

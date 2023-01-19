@@ -8,6 +8,7 @@ use \ReflectionClass,
 	Inn\Sql\Sentence,
 	Inn\Sql\ForeignColumns,
 	Inn\Sql\Cases,
+	Inn\Sql\ValueModifier,
 	Inn\Database\Database,
 	Inn\Database\StatementParams,
 	Inn\Database\Quote;
@@ -141,15 +142,19 @@ class DBMapper extends Sentence
 	 * Returns a single model by id column
 	 *
 	 * @access	public
-	 * @param	mixed	$id		Column id
+	 * @param	mixed	$id			Column id
+	 * @param	array	$decode		Columns to decode
 	 * @return	DBModel
 	 */
-	public function findId($id)
+	public function findId($id, array $decode = [])
 	{
-		return $this->where("{$this->table}.{$this->primary}", $id)
+		$result = $this->where("{$this->table}.{$this->primary}", $id)
 			->limit(1)
-			->find()
-			->first();
+			->find();
+		if (!empty($decode)) {
+			$result->decode($decode);
+		}
+		return $result->first();
 	}
 
 	/**
@@ -187,14 +192,19 @@ class DBMapper extends Sentence
 	 */
 	public function updateAll(array $data)
 	{
+		$raws = \array_filter($data, fn($value) => $value instanceof ValueModifier);
+		$data = \array_diff_key($data, $raws);
 		$properties = \array_intersect_key($this->properties, $data);
 		$params = new StatementParams();
 		foreach ($properties as $key => $property) {
 			$type = \is_array($property) ? $property['type'] : $property;
 			$params->add($type, $data[$key]);
 		}
+		foreach ($raws as $key => $value) {
+			$raws[$key] = $value->build("{$this->table}.{$key}");
+		}
 		$this->database->execute(
-			$this->buildUpdate(\array_keys($properties)),
+			$this->buildUpdate(\array_keys($properties), $raws),
 			$params
 		);
 	}

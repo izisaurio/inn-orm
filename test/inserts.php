@@ -32,7 +32,7 @@ class users extends DBMapper
 		],
 		'attributes' => [
 			'type' => 'json',
-			'isArray' => true,
+			'isJson' => true,
 			'label' => 'User attributes',
 		],
 	];
