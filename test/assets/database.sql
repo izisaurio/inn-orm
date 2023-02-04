@@ -37,6 +37,13 @@ CREATE TABLE users_subjects(
 	FOREIGN KEY (idSubject) REFERENCES subjects (id)
 )ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;
 
+CREATE TABLE nullables(
+	id int AUTO_INCREMENT NOT NULL,
+	name varchar(155) NOT NULL,
+	value varchar(15),
+	CONSTRAINT PRIMARY KEY (id)
+)ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 AUTO_INCREMENT=1;
+
 INSERT INTO users VALUES (0, 'izisaurio', 'izi.isaac@gmail.com', '{"age": "36"}' 1234567890);
 INSERT INTO tasks VALUES (0, 'develop', 1);
 INSERT INTO subjects VALUES (0, 'first');
