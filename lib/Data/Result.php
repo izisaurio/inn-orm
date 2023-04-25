@@ -124,7 +124,7 @@ class Result
 			return [];
 		}
 		$column = \array_key_first($this->source[0]);
-		return \array_column($this->source, $column);
+		return \array_column($this->source(), $column);
 	}
 
 	/**
@@ -139,7 +139,7 @@ class Result
 			return [];
 		}
 		list($key, $value) = \array_keys($this->source[0]);
-		return \array_column($this->source, $value, $key);
+		return \array_column($this->source(), $value, $key);
 	}
 
 	/**
@@ -156,7 +156,7 @@ class Result
 			return [];
 		}
 		$keys = \array_column($this->source, $key);
-		$collection = $source ? $this->source : $this->all();
+		$collection = $source ? $this->source() : $this->all();
 		return \array_combine($keys, $collection);
 	}
 
