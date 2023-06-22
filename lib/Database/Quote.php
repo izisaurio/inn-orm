@@ -43,6 +43,9 @@ class Quote
 		if (!isset(self::$database)) {
 			throw new DatabaseInstanceNotFoundException();
 		}
+		if (!isset($value)) {
+			$value = '';
+		}
 		$this->value = is_array($value)
 			? \array_map([self::$database->connection, 'quote'], $value)
 			: self::$database->connection->quote($value);
