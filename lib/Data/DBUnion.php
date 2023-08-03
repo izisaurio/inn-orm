@@ -143,7 +143,7 @@ class DBUnion extends Sentence
 	 *
 	 * @access	protected
 	 * @param	DBModel	$model		Model to use
-	 * @return	stdClass
+	 * @return	\stdClass
 	 */
 	protected function getData(DBModel $model)
 	{

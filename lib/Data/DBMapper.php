@@ -263,7 +263,7 @@ class DBMapper extends Sentence
 	public function delete(DBModel $model)
 	{
 		$this->where('id', '=', '?');
-		$params = new StatementParams(['INT' => $model->{$this->primary}]);
+		$params = new StatementParams([['INT', $model->{$this->primary}]]);
 		$this->deleteAll($params);
 	}
 
@@ -318,7 +318,7 @@ class DBMapper extends Sentence
 	 * Returns a new DBModel with this mapper set
 	 *
 	 * @access	public
-	 * @return	DBMapper
+	 * @return	DBModel
 	 */
 	public function getModel()
 	{

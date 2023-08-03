@@ -21,6 +21,20 @@ class StatementParams
 	public $items = [];
 
 	/**
+	 * Construct
+	 * 
+	 * Initializes the param collection, the param has to be in format [['type', 'value']]
+	 * 
+	 * @access	public
+	 * @param	array	$params		Param collection
+	 */
+	public function __construct(array $params = []) {
+		foreach ($params as $param) {
+			$this->add($param[0], $param[1]);
+		}
+	}
+
+	/**
 	 * Adds a param to collection
 	 *
 	 * @access	public

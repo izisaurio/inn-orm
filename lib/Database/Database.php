@@ -35,7 +35,7 @@ class Database
 	 * Statement
 	 *
 	 * @access	protected
-	 * @var		PDOStatement
+	 * @var		\PDOStatement
 	 */
 	protected $statement;
 
