@@ -32,8 +32,8 @@ class JsonSet implements ValueModifier
 	 * Builds the sql
 	 *
 	 * @access	public
-	 * @param	array	$attribute	Json attribute
-	 * @param	string	$value		Atribute's new value
+	 * @param	string	$attribute	Json attribute
+	 * @param	mixed	$value		Atribute's new value
 	 */
 	public function __construct($attribute, $value)
 	{

@@ -422,7 +422,7 @@ class Sentence
 		}
 		$joinColumn = $this->prepareColumn($joinColumn, $join);
 		$tableColumn = $this->prepareColumn($tableColumn);
-		$this->join[] = "{$type} JOIN {$join} ON {$joinColumn} {$operator} {$tableColumn}";
+		$this->join[$join] = "{$type} JOIN {$join} ON {$joinColumn} {$operator} {$tableColumn}";
 		return $this;
 	}
 
