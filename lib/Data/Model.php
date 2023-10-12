@@ -5,12 +5,13 @@ namespace Inn\Data;
 use Inn\Validator\DataObject, Inn\Exceptions\OrmException;
 
 /**
- * Data model
+ * Data model, this class allows dynamic properties
  *
  * @author	izisuario
  * @version	1
  */
-class Model
+#[\AllowDynamicProperties]
+ class Model
 {
 	/**
 	 * Returns an array with this model properties
