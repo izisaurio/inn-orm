@@ -167,12 +167,12 @@ class Sentence
 	/**
 	 * Adds a raw where
 	 *
-	 * @access	private
+	 * @access	public
 	 * @param	string		$where		Where operation
 	 * @param	string		$type		Where union type (and, or)
 	 * @return	mixed
 	 */
-	private function rawWhere($where, $type = 'AND')
+	public function rawWhere($where, $type = 'AND')
 	{
 		$where = empty($this->where) ? $where : "{$type} {$where}";
 		$this->where[] = $where;

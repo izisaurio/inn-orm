@@ -48,11 +48,11 @@ $user
 	->save()
 	->setInsertId();
 
-$user->attributes = new JsonSet('name', 'izi');
+$user->attributes = new JsonSet('age', '37.4');
 $user->save();
 
 //var_dump($user);
 
 (new users($db))
 	->whereNotNull('attributes')
-	->updateAll(['attributes' => new JsonSet('name', 'izisaurio')]);
+	->updateAll(['attributes' => new JsonSet('name', 'izisaurio\'s')]);

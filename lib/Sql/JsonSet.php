@@ -2,6 +2,8 @@
 
 namespace Inn\Sql;
 
+use Inn\Database\Quote;
+
 /**
  * Value type for updating json attributes
  *
@@ -38,7 +40,7 @@ class JsonSet implements ValueModifier
 	public function __construct($attribute, $value)
 	{
 		$this->attribute = $attribute;
-		$this->value = $value;
+		$this->value = \is_numeric($value) ? $value : new Quote($value);
 	}
 
 	/**
@@ -50,6 +52,6 @@ class JsonSet implements ValueModifier
 	 */
 	public function build($data)
 	{
-		return "JSON_SET({$data}, '$.{$this->attribute}', '{$this->value}')";
+		return "JSON_SET({$data}, '$.{$this->attribute}', {$this->value})";
 	}
 }
