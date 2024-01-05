@@ -204,7 +204,7 @@ class Sentence
 			$operator = '=';
 		}
 		$compare = $this->prepareColumn($compare);
-		$to = $this->quote($to);
+		$to = $to instanceof Sentence ? "({$to->buildSelect()})" : $this->quote($to);
 		return $this->rawWhere("{$compare} {$operator} {$to}", $type);
 	}
 
@@ -256,8 +256,8 @@ class Sentence
 		}
 		$data =
 			$values instanceof Quote
-				? \join(',', $values->value)
-				: \join(',', $values);
+			? \join(',', $values->value)
+			: \join(',', $values);
 		$compare = $this->prepareColumn($compare);
 		return $this->rawWhere("{$compare} IN ({$data})", $type);
 	}
@@ -291,8 +291,8 @@ class Sentence
 		}
 		$data =
 			$values instanceof Quote
-				? \join(',', $values->value)
-				: \join(',', $values);
+			? \join(',', $values->value)
+			: \join(',', $values);
 		$compare = $this->prepareColumn($compare);
 		return $this->rawWhere("{$compare} NOT IN ({$data})", $type);
 	}
@@ -625,7 +625,7 @@ class Sentence
 			$operator = '=';
 		}
 		$compare = $this->prepareColumn($compare);
-		$to = $this->quote($to);
+		$to = $to instanceof Sentence ? "({$to->buildSelect()})" : $this->quote($to);
 		return $this->rawHaving("{$compare} {$operator} {$to}");
 	}
 
