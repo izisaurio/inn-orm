@@ -30,3 +30,13 @@ $decoded = (new users($db))
 	->all();
 
 var_dump($decoded);
+
+//When decoding a non json value it sets it as null
+$withError = (new users($db))
+	->select(['name', 'attributes'])
+	->where('id', 1)
+	->find()
+	->decode(['attributes', 'name'])
+	->all();
+
+var_dump($withError);

@@ -81,10 +81,15 @@ class Result
 		if (!empty($this->decode)) {
 			foreach ($this->source as &$item) {
 				foreach ($this->decode as $column) {
-					$item[$column] = \json_decode(
-						$item[$column],
-						$this->decodeAsArray
-					);
+					if (!isset($item[$column])) {
+						continue;
+					}
+					$json = \json_decode($item[$column], $this->decodeAsArray);
+					if (\json_last_error() !== JSON_ERROR_NONE) {
+						$item[$column] = null;
+						continue;
+					}
+					$item[$column] = $json;
 				}
 			}
 		}
