@@ -41,6 +41,7 @@ class Mysql extends Plugin
 	 * @param	string	$database	Database name
 	 * @param	string	$user		Database username
 	 * @param	string	$password	Database user password
+	 * @param	string	$posrt		Database port
 	 * @param	string	$charset	Database default charset
 	 */
 	public function __construct(
@@ -48,9 +49,10 @@ class Mysql extends Plugin
 		$database,
 		$user,
 		$password,
+		$port = 3306,
 		$charset = 'utf8mb4'
 	) {
-		$this->dsn = "mysql:dbname={$database};host={$server}";
+		$this->dsn = "mysql:dbname={$database};host={$server};port={$port}";
 		$this->user = $user;
 		$this->password = $password;
 		$this->charset = $charset;
