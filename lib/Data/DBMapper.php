@@ -51,7 +51,7 @@ class DBMapper extends Sentence
 	 * Sets the database instance and the default table name if none
 	 *
 	 * @access	public
-	 * @param	Database\Database	$database	Database instance
+	 * @param	Database	$database	Database instance
 	 */
 	public function __construct(Database $database)
 	{

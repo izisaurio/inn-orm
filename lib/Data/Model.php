@@ -96,4 +96,23 @@ use Inn\Validator\DataObject, Inn\Exceptions\OrmException;
 		}
 		return $this;
 	}
+
+	/**
+	 * Utility method to search a value in a multi level object
+	 * 
+	 * @access	public
+	 * @param	array	$array		Values to travese
+	 * @param	mixed	$default	Value to return if null
+	 */
+	public function traverse(array $array, $default = null)
+	{
+		$key = $this;
+		foreach ($array as $property) {
+			if (!isset($key->{$property}) || $key->{$property} === null) {
+				return $default;
+			}
+			$key = $key->{$property};
+		}
+		return $key;
+	}
 }

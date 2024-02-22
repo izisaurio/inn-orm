@@ -42,7 +42,15 @@ $db = new Database($mysql);
 $user = (new users($db))->select(['*'])->findId(1, ['attributes']);
 
 $user->name = 'SlayTheSpire';
-$user->attributes = ['age' => 36];
+$user->attributes = [
+	'age' => 36,
+	'data' => [
+		'job' => [
+			'name' => 'Developer',
+			'expirience' => '17 years',
+		]
+	]
+];
 $user
 	->validate()
 	->save()

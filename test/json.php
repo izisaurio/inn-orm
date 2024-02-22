@@ -31,6 +31,19 @@ $decoded = (new users($db))
 
 var_dump($decoded);
 
+//Traverse json data
+$jobName = $decoded[0]->traverse(['attributes', 'data', 'job', 'name']);
+
+var_dump("Traversed: {$jobName}");
+
+$traversedDefault = $decoded[0]->traverse(['attributes', 'data', 'job', 'position'], 'Default');
+
+var_dump("Traversed default: {$traversedDefault}");
+
+$traversedNull = $decoded[0]->traverse(['attributes', 'data', 'job', 'position']);
+
+var_dump($traversedNull, isset($traversedNull));
+
 //When decoding a non json value it sets it as null
 $withError = (new users($db))
 	->select(['name', 'attributes'])

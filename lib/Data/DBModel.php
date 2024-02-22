@@ -10,6 +10,7 @@ use Inn\Exceptions\DatabaseStatementException, Inn\Exceptions\OrmException;
  * @author	izisaurio
  * @version	1
  */
+#[\AllowDynamicProperties]
 class DBModel extends Model
 {
 	/**
