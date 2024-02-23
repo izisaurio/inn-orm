@@ -11,7 +11,7 @@ use Inn\Validator\DataObject, Inn\Exceptions\OrmException;
  * @version	1
  */
 #[\AllowDynamicProperties]
- class Model
+class Model
 {
 	/**
 	 * Returns an array with this model properties
@@ -88,17 +88,19 @@ use Inn\Validator\DataObject, Inn\Exceptions\OrmException;
 				\is_array($value) &&
 				\array_key_exists('default', $value)
 			) {
-				$this->{$key} = (new DefaultValue(
-					$this,
-					$value['default']
-				))->value;
+				$this->{$key} = (
+					new DefaultValue(
+						$this,
+						$value['default']
+					)
+				)->value;
 			}
 		}
 		return $this;
 	}
 
 	/**
-	 * Utility method to search a value in a multi level object
+	 * Utility method to search a value in a multi level object or array
 	 * 
 	 * @access	public
 	 * @param	array	$array		Values to travese
@@ -108,10 +110,17 @@ use Inn\Validator\DataObject, Inn\Exceptions\OrmException;
 	{
 		$key = $this;
 		foreach ($array as $property) {
-			if (!isset($key->{$property}) || $key->{$property} === null) {
-				return $default;
+			if (is_array($key)) {
+				if (!isset($key[$property]) || $key[$property] === null) {
+					return $default;
+				}
+				$key = $key[$property];
+			} else {
+				if (!isset($key->{$property}) || $key->{$property} === null) {
+					return $default;
+				}
+				$key = $key->{$property};
 			}
-			$key = $key->{$property};
 		}
 		return $key;
 	}

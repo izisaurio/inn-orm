@@ -44,6 +44,13 @@ $traversedNull = $decoded[0]->traverse(['attributes', 'data', 'job', 'position']
 
 var_dump($traversedNull, isset($traversedNull));
 
+//Traverse array in object
+$decoded[0]->collection = (object)['data' => ['job' => ['name' => 'Tester', 'expirience' => 17]]];
+
+$jobName = $decoded[0]->traverse(['collection', 'data', 'job', 'name']);
+
+var_dump("Traversed array: {$jobName}");
+
 //When decoding a non json value it sets it as null
 $withError = (new users($db))
 	->select(['name', 'attributes'])
