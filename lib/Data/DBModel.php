@@ -53,7 +53,7 @@ class DBModel extends Model
 	 * @param	array			$messages	Error messages array
 	 * @param	string			$language	Optional label language
 	 * @throws	OrmException
-	 * @return	Model
+	 * @return	static
 	 */
 	public function validate(array $rules = null, array $messages = null, $language = null)
 	{
@@ -68,7 +68,7 @@ class DBModel extends Model
 	 *
 	 * @access	public
 	 * @param	array	$rules		Rules array
-	 * @return	Model
+	 * @return	static
 	 */
 	public function setDefaults(array $rules = null)
 	{
@@ -82,7 +82,7 @@ class DBModel extends Model
 	 * Save model, insert of update if id is set
 	 *
 	 * @access	public
-	 * @return	DBModel
+	 * @return	static
 	 * @throws	OrmException
 	 */
 	public function save()
@@ -99,7 +99,7 @@ class DBModel extends Model
 	 * Sets model id usinf last id
 	 *
 	 * @access	public
-	 * @return	DBModel
+	 * @return	static
 	 */
 	public function setInsertId()
 	{
@@ -131,7 +131,7 @@ class DBModel extends Model
 	 * @access	public
 	 * @param	DBUnion		$dbUnion	DBUnion instance to update
 	 * @param	array		$data		Data to store
-	 * @return	DBModel
+	 * @return	static
 	 * @throws	OrmException
 	 */
 	public function updateUnion(DBUnion $dbUnion, $data = [])
