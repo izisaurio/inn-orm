@@ -37,7 +37,7 @@ class DBUnion extends Sentence
 	 * Sets the database instance and the default table name if none
 	 *
 	 * @access	public
-	 * @param	Database\Database	$database	Database instance
+	 * @param	Database	$database	Database instance
 	 */
 	public function __construct(Database $database)
 	{
@@ -141,7 +141,7 @@ class DBUnion extends Sentence
 	/**
 	 * Delete rows on current mapper conditionals
 	 *
-	 * @param	Database\StatementParams	$params		Params to add to sentence
+	 * @param	StatementParams	$params		Params to add to sentence
 	 * @access	public
 	 */
 	public function deleteAll(StatementParams $params = null)

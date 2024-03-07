@@ -64,7 +64,7 @@ class Mysql extends Plugin
 	 * @access	public
 	 * @param	string		$type	Innsert\orm type
 	 * @return	int
-	 * @throws	Exceptions\PluginDataTypeNotFoundException
+	 * @throws	PluginDataTypeNotFoundException
 	 */
 	public function translate($type)
 	{

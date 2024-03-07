@@ -26,7 +26,7 @@ $decoded = (new users($db))
 	->select(['name', 'attributes'])
 	->where('id', 1)
 	->find()
-	->decode(['attributes'])
+	->decode(['attributes'], true)
 	->all();
 
 var_dump($decoded);

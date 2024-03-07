@@ -124,7 +124,7 @@ class DBMapper extends Sentence
 	 * Returns a search query Result object
 	 *
 	 * @access	public
-	 * @param	Database\StatementParams	$params		Params to add to search sentence
+	 * @param	StatementParams	$params		Params to add to search sentence
 	 * @return	Result
 	 */
 	public function find(StatementParams $params = null)
@@ -161,7 +161,7 @@ class DBMapper extends Sentence
 	 * Inserts a model to database
 	 *
 	 * @access	public
-	 * @param	Data\DBModel	$model		Model to insert
+	 * @param	DBModel	$model		Model to insert
 	 * @throws	PropertyNotFoundException
 	 */
 	public function insert(DBModel $model)
@@ -213,7 +213,7 @@ class DBMapper extends Sentence
 	 * Updates a model
 	 *
 	 * @access	public
-	 * @param	Data\DBModel	$model	Model to update
+	 * @param	DBModel	$model	Model to update
 	 */
 	public function update(DBModel $model)
 	{
@@ -231,7 +231,7 @@ class DBMapper extends Sentence
 	 * Saves a model, insert or update if id is present
 	 *
 	 * @access	public
-	 * @param	Data\DBModel	$model		Model to save
+	 * @param	DBModel	$model		Model to save
 	 * @param	bool	$lastId		Set last id to model flag when insertion
 	 */
 	public function save(DBModel $model)
@@ -246,7 +246,7 @@ class DBMapper extends Sentence
 	/**
 	 * Delete rows on current mapper conditionals
 	 *
-	 * @param	Database\StatementParams	$params		Params to add to sentence
+	 * @param	StatementParams	$params		Params to add to sentence
 	 * @access	public
 	 */
 	public function deleteAll(StatementParams $params = null)
@@ -258,7 +258,7 @@ class DBMapper extends Sentence
 	 * Deletes a model row
 	 *
 	 * @access	public
-	 * @param	Data\DBModel	$model	Model to delete
+	 * @param	DBModel	$model	Model to delete
 	 */
 	public function delete(DBModel $model)
 	{
@@ -271,7 +271,7 @@ class DBMapper extends Sentence
 	 * Counts results of current mapper conditionals
 	 *
 	 * @access	public
-	 * @param	Database\StatementParams	$params		Params to add to sentence
+	 * @param	StatementParams	$params		Params to add to sentence
 	 * @return	int
 	 */
 	public function count(StatementParams $params = null)
@@ -290,7 +290,7 @@ class DBMapper extends Sentence
 	 * Returns if a current mappers conditionals exist
 	 *
 	 * @access	public
-	 * @param	Database\StatementParams	$params		Params to add to sentence
+	 * @param	StatementParams	$params		Params to add to sentence
 	 * @return	bool
 	 */
 	public function exists(StatementParams $params = null)

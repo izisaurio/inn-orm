@@ -22,7 +22,7 @@ class Result
 	 * Mapper that created the results
 	 *
 	 * @access	protected
-	 * @var		Data\DBMapper
+	 * @var		DBMapper
 	 */
 	protected $mapper;
 
@@ -48,8 +48,8 @@ class Result
 	 * Sets source and mapper
 	 *
 	 * @access	public
-	 * @param	array			$source		Query results raw
-	 * @param	Data\DBMapper	$mapper		Mapper that created  the results
+	 * @param	array		$source		Query results raw
+	 * @param	DBMapper	$mapper		Mapper that created  the results
 	 */
 	public function __construct(array $source, DBMapper $mapper)
 	{
@@ -62,10 +62,12 @@ class Result
 	 *
 	 * @access	public
 	 * @param	array	$columns	Columns to decode
-	 * @return	Data\Result
+	 * @param	bool	$asArray	Flag to decode as array
+	 * @return	Result
 	 */
-	public function decode(array $columns)
+	public function decode(array $columns, $asArray = false)
 	{
+		$this->decodeAsArray = $asArray;
 		$this->decode = $columns;
 		return $this;
 	}
@@ -105,7 +107,6 @@ class Result
 	public function all()
 	{
 		$results = [];
-		$this->decodeAsArray = false;
 		$source = $this->source();
 		foreach ($source as $row) {
 			$model = $this->mapper->getModel();
@@ -181,7 +182,7 @@ class Result
 	 * Returns first result as model
 	 *
 	 * @access	public
-	 * @return	Data\DBModel
+	 * @return	DBModel
 	 */
 	public function first()
 	{

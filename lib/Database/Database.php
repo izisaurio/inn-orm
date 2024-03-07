@@ -19,7 +19,7 @@ class Database
 	 * Database type plugin
 	 *
 	 * @access	public
-	 * @var		Database\Plugin
+	 * @var		Plugin
 	 */
 	public $plugin;
 
@@ -54,7 +54,7 @@ class Database
 	 *
 	 * @access	public
 	 * @param	Plugin	$plugin		Database connection plugin
-	 * @throws	Exceptions\DatabaseConnectException
+	 * @throws	DatabaseConnectException
 	 */
 	public function __construct(Plugin $plugin)
 	{
@@ -81,7 +81,7 @@ class Database
 	 * @access	public
 	 * @param	string			$query		Query sentence
 	 * @param	StatementParams	$params		Params added to sentence
-	 * @throws	Exceptions\DatabaseStatementException
+	 * @throws	DatabaseStatementException
 	 */
 	public function processStatement($query, StatementParams $params = null)
 	{
@@ -106,7 +106,7 @@ class Database
 	 *
 	 * @access	public
 	 * @param	string	$query		Query sentence
-	 * @throws	Exceptions\DatabaseStatementException
+	 * @throws	DatabaseStatementException
 	 */
 	public function prepareStatement($query)
 	{
@@ -124,7 +124,7 @@ class Database
 	 *
 	 * @access	public
 	 * @param	StatementParams	$params		Params to add
-	 * @throws	Exceptions\DatabaseStatementException
+	 * @throws	DatabaseStatementException
 	 */
 	public function bindParams(StatementParams $params)
 	{
@@ -148,7 +148,7 @@ class Database
 	 * Executes a prepared statement
 	 *
 	 * @access	public
-	 * @throws	Exceptions\DatabaseStatementException
+	 * @throws	DatabaseStatementException
 	 */
 	public function executeStatement()
 	{
@@ -167,7 +167,7 @@ class Database
 	 * @param	string			$query		Search query sentence
 	 * @param	StatementParams	$params		Params added to sentence
 	 * @return	array
-	 * @throws	Exceptions\DatabaseStatementException
+	 * @throws	DatabaseStatementException
 	 */
 	public function search($query, StatementParams $params = null)
 	{
@@ -188,7 +188,7 @@ class Database
 	 * @access	public
 	 * @param	string			$query		Non search query sentence
 	 * @param	StatementParams	$params		Params added to sentence
-	 * @throws	Exceptions\DatabaseStatementException
+	 * @throws	DatabaseStatementException
 	 */
 	public function execute($query, StatementParams $params = null)
 	{
