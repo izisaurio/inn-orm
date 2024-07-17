@@ -25,7 +25,7 @@ class DBMapper extends Sentence
 	 * Database instance
 	 *
 	 * @access	public
-	 * @var		Database\Database
+	 * @var		Database
 	 */
 	public $database;
 

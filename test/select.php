@@ -38,3 +38,13 @@ $result = $subjects
 	->source();
 
 var_dump($result);
+
+$between = (new subjects($db))
+	->select(['id', 'name'])
+	->whereBetween('id', 2, 3)
+	->find()
+	->source();
+
+var_dump($between);
+
+var_dump($db->queriesLog);

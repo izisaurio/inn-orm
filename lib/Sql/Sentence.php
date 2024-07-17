@@ -373,8 +373,10 @@ class Sentence
 	public function whereBetween($compare, $first, $second, $type = 'AND')
 	{
 		$compare = $this->prepareColumn($compare);
+		$valueOne = $this->quote($first);
+		$valueTwo = $this->quote($second);
 		return $this->rawWhere(
-			"{$compare} BETWEEN {$first} AND {$second}",
+			"{$compare} BETWEEN {$valueOne} AND {$valueTwo}",
 			$type
 		);
 	}
