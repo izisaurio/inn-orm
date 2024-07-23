@@ -276,7 +276,7 @@ class DBMapper extends Sentence
 	 */
 	public function count(StatementParams $params = null)
 	{
-		$select = empty($this->groupBy)
+		$select = empty($this->join)
 			? 'count(1) AS count'
 			: "count(distinct {$this->table}.{$this->primary}) as count";
 		$counted = $this->select([$select])
