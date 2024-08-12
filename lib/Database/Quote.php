@@ -36,7 +36,7 @@ class Quote
 	 *
 	 * @access	public
 	 * @param	mixed	$value	Value to quote
-	 * @throws	DatabseInstanceNotFoundException
+	 * @throws	DatabaseInstanceNotFoundException
 	 */
 	public function __construct($value)
 	{

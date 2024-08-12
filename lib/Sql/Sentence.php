@@ -361,6 +361,36 @@ class Sentence
 	}
 
 	/**
+	 * Adds a "where json_contains" to sentence
+	 * 
+	 * @access	public
+	 * @param	string			$compare	Column or value to compare
+	 * @param	string			$value		Value to compare
+	 * @param	string			$type		Where union type (and, or)
+	 * @return	mixed
+	 */
+	public function whereJsonContains($compare, $value, $type = 'AND')
+	{
+		$compare = $this->prepareColumn($compare);
+		$value = $this->quote($value);
+		$value = trim($value, "'\"");
+		return $this->rawWhere("JSON_CONTAINS({$compare}, '\"{$value}\"')", $type);
+	}
+
+	/**
+	 * Adds a "where json_contains" to sentence of type "Or"
+	 *
+	 * @access	public
+	 * @param	string			$compare	Column or value to compare
+	 * @param	string			$value		Value to compare
+	 * @return	mixed
+	 */
+	public function orWhereJsonContains($compare, $value)
+	{
+		return $this->whereJsonContains($compare, $value, 'OR');
+	}
+
+	/**
 	 * Adds a "where between" to sentence
 	 *
 	 * @access	public
