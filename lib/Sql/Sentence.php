@@ -361,7 +361,7 @@ class Sentence
 	}
 
 	/**
-	 * Adds a "where json_contains" to sentence
+	 * Adds a "where json_contains" to sentence, this function does not quote the value
 	 * 
 	 * @access	public
 	 * @param	string			$compare	Column or value to compare
@@ -372,9 +372,7 @@ class Sentence
 	public function whereJsonContains($compare, $value, $type = 'AND')
 	{
 		$compare = $this->prepareColumn($compare);
-		$value = $this->quote($value);
-		$value = trim($value, "'\"");
-		return $this->rawWhere("JSON_CONTAINS({$compare}, '\"{$value}\"')", $type);
+		return $this->rawWhere("JSON_CONTAINS({$compare}, '{$value}')", $type);
 	}
 
 	/**
