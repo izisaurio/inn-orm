@@ -30,6 +30,11 @@ class users extends DBMapper
 			'default' => 1234567890,
 			'label' => 'Phone number',
 		],
+		'attributes' => [
+			'type' => 'json',
+			'isJson' => true,
+			'label' => 'User attributes',
+		],
 	];
 }
 
@@ -41,11 +46,11 @@ $select = $mapper
 	->select([
 		'id',
 		new Cases(
-			'users.name',
 			[
 				'izisaurios' => 'main',
 				'editted' => 'secondary',
 			],
+			'users.name',
 			'other'
 		),
 	])
@@ -58,4 +63,21 @@ foreach ($select as $user) {
 	var_dump($user->id, $user->users_name);
 }
 
-var_dump($db->queriesLog);
+//var_dump($db->queriesLog);
+
+$mapper = new users($db);
+$select = $mapper
+	->select([
+		'id',
+		new Cases(
+			[
+				'attributes->>"$.age" between 10 and 25' => 'young',
+				'attributes->>"$.age" between 26 and 50' => 'middle',
+				'attributes->>"$.age" between 51 and 100' => 'old',
+			]
+		),
+	])
+	->find()
+	->assoc();
+
+var_dump($select);

@@ -90,7 +90,12 @@ class DBMapper extends Sentence
 
 					case ':':
 						$name = \ltrim($key, ':');
-						$columns[] = new Cases($name, $column);
+						$columns[] = new Cases($column, $name);
+						break;
+
+					case '=':
+						$name = \ltrim($key, '=');
+						$columns[] = new Cases($column, null, null, $name);
 						break;
 
 					case '@':

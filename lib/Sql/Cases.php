@@ -48,17 +48,17 @@ class Cases
 	 * Sets source and mapper
 	 *
 	 * @access	public
-	 * @param	string	$column		Select column to be compared
 	 * @param	array	$cases		Keys are cases, values are selected text
+	 * @param	string	$column		Select column to be compared
 	 * @param	string	$as			Select alias
 	 * @param	string	$else		Else de los cases
 	 */
-	public function __construct($column, array $cases, $else = null, $as = null)
+	public function __construct(array $cases, $column = null, $else = null, $as = null)
 	{
 		$this->column = $column;
 		$this->cases = $cases;
 		$this->else = $else;
-		$this->as = isset($as) ? $as : \str_replace('.', '_', $column);
+		$this->as = isset($as) ? $as : (isset($column) ? \str_replace('.', '_', $column) : 'cases');
 	}
 
 	/**
@@ -72,7 +72,7 @@ class Cases
 		$builder = [];
 		foreach ($this->cases as $key => $value) {
 			if (\is_string($key)) {
-				$key = "'{$key}'";
+				$key = !isset($this->column) ? $key : "'{$key}'";
 			}
 			if (\is_string($value)) {
 				$value = "'{$value}'";
@@ -85,6 +85,7 @@ class Cases
 				: "ELSE {$this->else}";
 		}
 		$builded = \join(' ', $builder);
-		return "CASE {$this->column} {$builded} END AS {$this->as}";
+		$column = isset($this->column) ? $this->column : '';
+		return "CASE {$column} {$builded} END AS {$this->as}";
 	}
 }
