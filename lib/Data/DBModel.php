@@ -42,6 +42,7 @@ class DBModel extends Model
 	{
 		$properties = \get_object_vars($this);
 		unset($properties['_mapper']);
+		unset($properties['_errors']);
 		return $properties;
 	}
 

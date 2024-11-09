@@ -14,6 +14,14 @@ use Inn\Validator\DataObject, Inn\Exceptions\OrmException;
 class Model
 {
 	/**
+	 * Error collection when validation fails
+	 * 
+	 * @access	public
+	 * @var		array
+	 */
+	public $_errors = [];
+
+	/**
 	 * Returns an array with this model properties
 	 *
 	 * @access	public
@@ -21,7 +29,9 @@ class Model
 	 */
 	public function toArray()
 	{
-		return \get_object_vars($this);
+		$properties = \get_object_vars($this);
+		unset($properties['_errors']);
+		return $properties;
 	}
 
 	/**
@@ -46,7 +56,8 @@ class Model
 			$language
 		);
 		if (!$dataObject->validate()) {
-			throw new OrmException(join("\n", $dataObject->getErrors()));
+			$this->_errors = $dataObject->getErrors();
+			throw new OrmException(join("\n", $this->_errors));
 		}
 		return $this;
 	}
