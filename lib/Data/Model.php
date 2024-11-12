@@ -56,8 +56,8 @@ class Model
 			$language
 		);
 		if (!$dataObject->validate()) {
-			$this->_errors = $dataObject->getErrors();
-			throw new OrmException(join("\n", $this->_errors));
+			$this->_errors = $dataObject->getErrorsByKey();
+			throw new OrmException(join("\n", $dataObject->getErrors()));
 		}
 		return $this;
 	}
@@ -67,11 +67,11 @@ class Model
 	 *
 	 * @access	public
 	 * @param	array			$rules		Model rules
-	 * @param	string			$messages	Error messages file path
+	 * @param	array			$messages	Error messages file path
 	 * @throws	OrmException
 	 * @return	Model
 	 */
-	public function validateSetted(array $rules, $messages = null)
+	public function validateSetted(array $rules, array $messages = null)
 	{
 		$dataObject = new DataObject(
 			\array_intersect_key($rules, $this->toArray()),
@@ -79,6 +79,7 @@ class Model
 			$messages
 		);
 		if (!$dataObject->validate()) {
+			$this->_errors = $dataObject->getErrorsByKey();
 			throw new OrmException(join("\n", $dataObject->getErrors()));
 		}
 		return $this;

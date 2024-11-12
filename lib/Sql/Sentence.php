@@ -113,7 +113,7 @@ class Sentence
 	 *
 	 * @access	public
 	 * @param	array		$select		Columns
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function select(array $select)
 	{
@@ -156,7 +156,7 @@ class Sentence
 	 *
 	 * @access	public
 	 * @param	string	$alias	Sentence alias
-	 * @return	SubSentence
+	 * @return	static
 	 */
 	public function alias($alias)
 	{
@@ -170,7 +170,7 @@ class Sentence
 	 * @access	public
 	 * @param	string		$where		Where operation
 	 * @param	string		$type		Where union type (and, or)
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function rawWhere($where, $type = 'AND')
 	{
@@ -189,7 +189,7 @@ class Sentence
 	 * @param	mixed			$operator	Where operator
 	 * @param	mixed			$to			Value to compare
 	 * @param	string			$type		Where union type (and, or)
-	 * @return	Sentence
+	 * @return	static
 	 */
 	public function where($compare, $operator = null, $to = null, $type = 'AND')
 	{
@@ -217,7 +217,7 @@ class Sentence
 	 * @param	string|Closure	$compare	Column or value to compare|Closure for nested wheres
 	 * @param	mixed			$operator	Where operator
 	 * @param	mixed			$to			Value to compare
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function andWhere($compare, $operator = null, $to = null)
 	{
@@ -233,7 +233,7 @@ class Sentence
 	 * @param	string|Closure	$compare	Column or value to compare|Closure for nested wheres
 	 * @param	mixed			$operator	Where operator
 	 * @param	mixed			$to			Value to compare
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function orWhere($compare, $operator = null, $to = null)
 	{
@@ -247,7 +247,7 @@ class Sentence
 	 * @param	string			$compare	Column or value to compare
 	 * @param	array|Quote		$values		Values
 	 * @param	string			$type		Where union type (and, or)
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function whereIn($compare, $values, $type = 'AND')
 	{
@@ -268,7 +268,7 @@ class Sentence
 	 * @access	public
 	 * @param	string			$compare	Column or value to compare
 	 * @param	array|Quote		$values		Values
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function orWhereIn($compare, array $values)
 	{
@@ -282,7 +282,7 @@ class Sentence
 	 * @param	string			$compare	Column or value to compare
 	 * @param	array|Quote		$values		Values
 	 * @param	string			$type		Where union type (and, or)
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function whereNotIn($compare, array $values, $type = 'AND')
 	{
@@ -303,7 +303,7 @@ class Sentence
 	 * @access	public
 	 * @param	string			$compare	Column or value to compare
 	 * @param	array|Quote		$values		Values
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function orWhereNotIn($compare, $values)
 	{
@@ -316,7 +316,7 @@ class Sentence
 	 * @access	public
 	 * @param	string			$compare	Column or value to compare
 	 * @param	string			$type		Where union type (and, or)
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function whereNull($compare, $type = 'AND')
 	{
@@ -328,7 +328,7 @@ class Sentence
 	 *
 	 * @access	public
 	 * @param	string			$compare	Column or value to compare
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function orWhereNull($compare)
 	{
@@ -341,7 +341,7 @@ class Sentence
 	 * @access	public
 	 * @param	string			$compare	Column or value to compare
 	 * @param	string			$type		Where union type (and, or)
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function whereNotNull($compare, $type = 'AND')
 	{
@@ -353,7 +353,7 @@ class Sentence
 	 *
 	 * @access	public
 	 * @param	string			$compare	Column or value to compare
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function orWhereNotNull($compare)
 	{
@@ -367,7 +367,7 @@ class Sentence
 	 * @param	string			$compare	Column or value to compare
 	 * @param	string			$value		Value to compare
 	 * @param	string			$type		Where union type (and, or)
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function whereJsonContains($compare, $value, $type = 'AND')
 	{
@@ -381,7 +381,7 @@ class Sentence
 	 * @access	public
 	 * @param	string			$compare	Column or value to compare
 	 * @param	string			$value		Value to compare
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function orWhereJsonContains($compare, $value)
 	{
@@ -396,7 +396,7 @@ class Sentence
 	 * @param	string			$first		First value of range
 	 * @param	string			$second		Second value of range
 	 * @param	string			$type		Where union type (and, or)
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function whereBetween($compare, $first, $second, $type = 'AND')
 	{
@@ -416,7 +416,7 @@ class Sentence
 	 * @param	string			$compare	Campo o valor a comparar
 	 * @param	string			$first		Primer valor del rango
 	 * @param	string			$second		Segundo valor del rango
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function orWhereBetween($compare, $first, $second)
 	{
@@ -432,7 +432,7 @@ class Sentence
 	 * @param	string				$operator		Operator
 	 * @param	string				$tableColumn	This table key
 	 * @param	string				$type			Type of join
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function join(
 		$join,
@@ -464,7 +464,7 @@ class Sentence
 	 * @param	mixed|Clousure		$joinColumn		Foreign table key|Closure for nested joins
 	 * @param	string				$operator		Operator
 	 * @param	string				$tableColumn	This table key
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function innerJoin(
 		$join,
@@ -483,7 +483,7 @@ class Sentence
 	 * @param	mixed|Clousure		$joinColumn		Foreign table key|Closure for nested joins
 	 * @param	string				$operator		Operator
 	 * @param	string				$tableColumn	This table key
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function leftJoin(
 		$join,
@@ -502,7 +502,7 @@ class Sentence
 	 * @param	mixed|Clousure		$joinColumn		Foreign table key|Closure for nested joins
 	 * @param	string				$operator		Operator
 	 * @param	string				$tableColumn	This table key
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function rightJoin(
 		$join,
@@ -527,7 +527,7 @@ class Sentence
 	 * @param	mixed|Clousure		$joinColumn		Foreign table key|Closure for nested joins
 	 * @param	string				$operator		Operator
 	 * @param	string				$tableColumn	This table key
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function fullOuterJoin(
 		$join,
@@ -552,7 +552,7 @@ class Sentence
 	 * @param	string		$operator		Operator
 	 * @param	mixed		$tableColumn	This table key
 	 * @param	string		$type			On union type (and, or)
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function on($joinColumn, $operator, $tableColumn, $type = 'AND')
 	{
@@ -571,7 +571,7 @@ class Sentence
 	 * @param	mixed		$joinColumn		Foreign table key
 	 * @param	string		$operator		Operator
 	 * @param	mixed		$tableColumn	This table key
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function orOn($joinColumn, $operator, $tableColumn)
 	{
@@ -586,7 +586,7 @@ class Sentence
 	 * @param	array|Quote	$values			Values
 	 * @param	string		$type			On union type (and, or)
 	 * @param	string		$operator		Operator
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function onIn($joinColumn, $values, $type = 'AND', $operator = 'IN')
 	{
@@ -604,7 +604,7 @@ class Sentence
 	 * @param	mixed		$joinColumn		Foreign table key
 	 * @param	array		$values			Values
 	 * @param	string		$type			On union type (and, or)
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function onNotIn($joinColumn, array $values, $type = 'AND')
 	{
@@ -617,7 +617,7 @@ class Sentence
 	 * @access	private
 	 * @param	string		$having		Having operation
 	 * @param	string		$type		Having union type (and, or)
-	 * @return	mixed
+	 * @return	static
 	 */
 	private function rawHaving($having, $type = 'AND')
 	{
@@ -636,7 +636,7 @@ class Sentence
 	 * @param	mixed			$operator	Operator
 	 * @param	mixed			$to			Value of comparison
 	 * @param	string			$type		Having union type (And, Or)
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function having(
 		$compare,
@@ -668,7 +668,7 @@ class Sentence
 	 * @param	string/Closure	$compare	Column of value to compare|Closure for nested having
 	 * @param	mixed			$operator	Operator
 	 * @param	mixed			$to			Value of comparison
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function andHaving($compare, $operator = null, $to = null)
 	{
@@ -684,7 +684,7 @@ class Sentence
 	 * @param	string/Closure	$compare	Column of value to compare|Closure for nested having
 	 * @param	mixed			$operator	Operator
 	 * @param	mixed			$to			Value of comparison
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function orHaving($compare, $operator = null, $to = null)
 	{
@@ -696,7 +696,7 @@ class Sentence
 	 *
 	 * @access	public
 	 * @param	array		$group		Group by conditions
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function groupBy(array $group)
 	{
@@ -709,7 +709,7 @@ class Sentence
 	 *
 	 * @access	public
 	 * @param	array		$order		Order by conditions
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function orderBy(array $order)
 	{
@@ -722,7 +722,7 @@ class Sentence
 	 *
 	 * @access	public
 	 * @param	string		$limit		Query limit
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function limit($limit)
 	{
@@ -735,7 +735,7 @@ class Sentence
 	 *
 	 * @access	public
 	 * @param	string		$index		Query index
-	 * @return	mixed
+	 * @return	static
 	 */
 	public function index($index)
 	{
@@ -876,7 +876,7 @@ class Sentence
 	 * Returns a new instance with same table and DBInterface
 	 *
 	 * @access	protected
-	 * @return	SqlSentence
+	 * @return	Sentence
 	 */
 	protected function newSelf()
 	{

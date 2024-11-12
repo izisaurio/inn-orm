@@ -8,16 +8,16 @@
     "packages": [
         {
             "name": "izisaurio/inn-validator",
-            "version": "1.1.3",
+            "version": "1.1.4",
             "source": {
                 "type": "git",
                 "url": "https://github.com/izisaurio/inn-validator.git",
-                "reference": "c15f6ede0b931b5fd39903c0cd3ae0502f86ad97"
+                "reference": "c5d81332d1bd20390b576dbed70b5560a7e5bf88"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/izisaurio/inn-validator/zipball/c15f6ede0b931b5fd39903c0cd3ae0502f86ad97",
-                "reference": "c15f6ede0b931b5fd39903c0cd3ae0502f86ad97",
+                "url": "https://api.github.com/repos/izisaurio/inn-validator/zipball/c5d81332d1bd20390b576dbed70b5560a7e5bf88",
+                "reference": "c5d81332d1bd20390b576dbed70b5560a7e5bf88",
                 "shasum": ""
             },
             "require-dev": {
@@ -43,24 +43,24 @@
             "description": "A PHP simple object value validator",
             "support": {
                 "issues": "https://github.com/izisaurio/inn-validator/issues",
-                "source": "https://github.com/izisaurio/inn-validator/tree/1.1.3"
+                "source": "https://github.com/izisaurio/inn-validator/tree/1.1.4"
             },
-            "time": "2024-08-18T20:33:18+00:00"
+            "time": "2024-11-10T01:28:22+00:00"
         }
     ],
     "packages-dev": [
         {
             "name": "izisaurio/json-to-array",
-            "version": "1.0.2",
+            "version": "1.0.3",
             "source": {
                 "type": "git",
                 "url": "https://github.com/izisaurio/json-to-array.git",
-                "reference": "13d82f517c2680348be8ea18ee1130e89bcaa94d"
+                "reference": "987ef7fe06c65e76436416c209b9a250c67ae272"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/izisaurio/json-to-array/zipball/13d82f517c2680348be8ea18ee1130e89bcaa94d",
-                "reference": "13d82f517c2680348be8ea18ee1130e89bcaa94d",
+                "url": "https://api.github.com/repos/izisaurio/json-to-array/zipball/987ef7fe06c65e76436416c209b9a250c67ae272",
+                "reference": "987ef7fe06c65e76436416c209b9a250c67ae272",
                 "shasum": ""
             },
             "type": "library",
@@ -82,9 +82,9 @@
             "description": "Json file to PHP array",
             "support": {
                 "issues": "https://github.com/izisaurio/json-to-array/issues",
-                "source": "https://github.com/izisaurio/json-to-array/tree/1.0.2"
+                "source": "https://github.com/izisaurio/json-to-array/tree/1.0.3"
             },
-            "time": "2022-02-27T01:16:16+00:00"
+            "time": "2024-11-10T01:15:47+00:00"
         }
     ],
     "aliases": [],
