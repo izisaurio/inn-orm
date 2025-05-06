@@ -80,10 +80,10 @@ class Database
 	 *
 	 * @access	public
 	 * @param	string			$query		Query sentence
-	 * @param	StatementParams	$params		Params added to sentence
+	 * @param	?StatementParams	$params		Params added to sentence
 	 * @throws	DatabaseStatementException
 	 */
-	public function processStatement($query, StatementParams $params = null)
+	public function processStatement($query, ?StatementParams $params = null)
 	{
 		$this->queriesLog[] = $query;
 		if (isset($params)) {
@@ -165,11 +165,11 @@ class Database
 	 *
 	 * @access	public
 	 * @param	string			$query		Search query sentence
-	 * @param	StatementParams	$params		Params added to sentence
+	 * @param	?StatementParams	$params		Params added to sentence
 	 * @return	array
 	 * @throws	DatabaseStatementException
 	 */
-	public function search($query, StatementParams $params = null)
+	public function search($query, ?StatementParams $params = null)
 	{
 		$this->processStatement($query, $params);
 		$results = $this->statement->fetchAll(PDO::FETCH_ASSOC);
@@ -187,10 +187,10 @@ class Database
 	 *
 	 * @access	public
 	 * @param	string			$query		Non search query sentence
-	 * @param	StatementParams	$params		Params added to sentence
+	 * @param	?StatementParams	$params		Params added to sentence
 	 * @throws	DatabaseStatementException
 	 */
-	public function execute($query, StatementParams $params = null)
+	public function execute($query, ?StatementParams $params = null)
 	{
 		$this->processStatement($query, $params);
 	}

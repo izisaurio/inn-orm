@@ -66,7 +66,7 @@ class DBMapper extends Sentence
 	 *
 	 * @access	public
 	 * @param	array		$select		Columns
-	 * @return	mixed
+	 * @return	DBMapper
 	 */
 	public function select(array $select)
 	{
@@ -129,10 +129,10 @@ class DBMapper extends Sentence
 	 * Returns a search query Result object
 	 *
 	 * @access	public
-	 * @param	StatementParams	$params		Params to add to search sentence
+	 * @param	?StatementParams	$params		Params to add to search sentence
 	 * @return	Result
 	 */
-	public function find(StatementParams $params = null)
+	public function find(?StatementParams $params = null)
 	{
 		if (empty($this->select)) {
 			$this->select(['*']);
@@ -251,10 +251,10 @@ class DBMapper extends Sentence
 	/**
 	 * Delete rows on current mapper conditionals
 	 *
-	 * @param	StatementParams	$params		Params to add to sentence
+	 * @param	?StatementParams	$params		Params to add to sentence
 	 * @access	public
 	 */
-	public function deleteAll(StatementParams $params = null)
+	public function deleteAll(?StatementParams $params = null)
 	{
 		$this->database->execute($this->buildDelete(), $params);
 	}
@@ -276,10 +276,10 @@ class DBMapper extends Sentence
 	 * Counts results of current mapper conditionals
 	 *
 	 * @access	public
-	 * @param	StatementParams	$params		Params to add to sentence
+	 * @param	?StatementParams	$params		Params to add to sentence
 	 * @return	int
 	 */
-	public function count(StatementParams $params = null)
+	public function count(?StatementParams $params = null)
 	{
 		$select = empty($this->join)
 			? 'count(1) AS count'
@@ -295,10 +295,10 @@ class DBMapper extends Sentence
 	 * Returns if a current mappers conditionals exist
 	 *
 	 * @access	public
-	 * @param	StatementParams	$params		Params to add to sentence
+	 * @param	?StatementParams	$params		Params to add to sentence
 	 * @return	bool
 	 */
-	public function exists(StatementParams $params = null)
+	public function exists(?StatementParams $params = null)
 	{
 		$select = $this->select([1])->buildSelect();
 		$exists = "SELECT EXISTS ({$select}) AS FOUND";

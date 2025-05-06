@@ -39,14 +39,14 @@ class Model
 	 *
 	 * @access	public
 	 * @param	array			$rules		Model rules
-	 * @param	array			$messages	Error messages array
-	 * @param	string			$language	Optional label language
+	 * @param	?array			$messages	Error messages array
+	 * @param	?string			$language	Optional label language
 	 * @throws	OrmException
 	 * @return	Model
 	 */
 	public function validate(
 		array $rules,
-		array $messages = null,
+		?array $messages = null,
 		$language = null
 	) {
 		$dataObject = new DataObject(
@@ -67,11 +67,11 @@ class Model
 	 *
 	 * @access	public
 	 * @param	array			$rules		Model rules
-	 * @param	array			$messages	Error messages file path
+	 * @param	?array			$messages	Error messages file path
 	 * @throws	OrmException
 	 * @return	Model
 	 */
-	public function validateSetted(array $rules, array $messages = null)
+	public function validateSetted(array $rules, ?array $messages = null)
 	{
 		$dataObject = new DataObject(
 			\array_intersect_key($rules, $this->toArray()),
@@ -116,7 +116,7 @@ class Model
 	 * 
 	 * @access	public
 	 * @param	array	$array		Values to travese
-	 * @param	mixed	$default	Value to return if null
+	 * @param	?mixed	$default	Value to return if null
 	 */
 	public function traverse(array $array, $default = null)
 	{

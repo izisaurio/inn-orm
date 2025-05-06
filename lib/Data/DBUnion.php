@@ -141,10 +141,10 @@ class DBUnion extends Sentence
 	/**
 	 * Delete rows on current mapper conditionals
 	 *
-	 * @param	StatementParams	$params		Params to add to sentence
+	 * @param	?StatementParams	$params		Params to add to sentence
 	 * @access	public
 	 */
-	public function deleteAll(StatementParams $params = null)
+	public function deleteAll(?StatementParams $params = null)
 	{
 		$this->database->execute($this->buildDelete(), $params);
 	}
