@@ -5,7 +5,8 @@ namespace Inn\Database;
 use \PDO,
 	\PDOException,
 	Inn\Exceptions\DatabaseConnectException,
-	Inn\Exceptions\DatabaseStatementException;
+	Inn\Exceptions\DatabaseStatementException,
+	\PDO\Mysql;
 
 /**
  * PDO connection wrapper
@@ -66,7 +67,7 @@ class Database
 				$this->plugin->password,
 				[
 					PDO::ATTR_ERRMODE => PDO::ERRMODE_SILENT,
-					PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES {$this->plugin->charset}",
+					Mysql::ATTR_INIT_COMMAND => "SET NAMES {$this->plugin->charset}",
 				]
 			);
 		} catch (PDOException $ex) {
